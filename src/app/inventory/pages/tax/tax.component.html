@@ -1,0 +1,110 @@
+<div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">ALMACÉN</div>
+        <div class="card-body">
+          <form [formGroup]="taxProductForm" (submit)="onSave()">
+            <!-- name field  -->
+            <div class="form-floating mt-2">
+              <input
+                required
+                name="name"
+                formControlName="name"
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Nombre"
+              />
+              <label for="floatingInput">Nombre</label>
+            </div>
+
+            <div
+              *ngIf="taxProductForm.get('name')?.touched && taxProductForm.get('name')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El nombre es requerido
+            </div>
+
+            <div
+              *ngIf="taxProductForm.get('name')?.touched && taxProductForm.get('name')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+
+            <div
+              *ngIf="taxProductForm.get('name')?.touched && taxProductForm.get('name')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+
+            <div class="form-floating mt-2">
+                <input
+                  required
+                  name="value"
+                  formControlName="value"
+                  type="number"
+                  class="form-control"
+                  id="value"
+                  placeholder="Valor"
+                />
+                <label for="floatingInput">Valor</label>
+              </div>
+              
+              <div
+                *ngIf="taxProductForm.get('value')?.touched && taxProductForm.get('value')?.errors?.['required']"
+                class="alert alert-danger"
+              >
+               El valor es requerido
+              </div>
+   
+              <div
+                *ngIf="taxProductForm.get('value')?.touched && taxProductForm.get('value')?.errors?.['maxlength']"
+                class="alert alert-danger"
+              >
+                Se ha excedido el límite de carácteres
+              </div>
+
+            <input type="hidden" name="id" formControlName="id" />
+            <div class="d-grid gap-2 mt-2">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="taxProductForm.invalid"
+              >
+                G u a r d a r
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-8">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Almacén</th>
+            <th>Actualizado</th>
+            <th>Sub-menú</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tax of taxService.tax">
+            <td>{{ tax.name | uppercase }}</td>
+            <td>{{ tax.value | number  }}</td>
+            <td>
+              <a (click)="onEdit(tax)" class="btn btn-secondary btn-sm">
+                <i class="material-icons">edit</i>
+              </a>
+              <a (click)="onDelete(tax.id)" class="btn btn-danger btn-sm">
+                <i class="material-icons">delete</i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

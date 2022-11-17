@@ -15,8 +15,14 @@
       "prefix": "app",
       "architect": {
         "build": {
+          
           "builder": "@angular-devkit/build-angular:browser",
+
           "options": {
+            "allowedCommonJsDependencies": [
+              "sweetalert2",
+              "node_modules/sweetalert2/dist/sweetalert2.js"
+           ],
             "outputPath": "dist/nenypos_lite",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -28,9 +34,14 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -103,5 +114,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

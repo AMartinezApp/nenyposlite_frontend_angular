@@ -1,0 +1,135 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">NenyPos Lite</a>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <!-- setting menu  -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >Archivo</a
+          >
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Configuración</a>
+            <a class="dropdown-item" href="#">Usuarios</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">NCF</a>
+            <a class="dropdown-item" [routerLink]="['suppliers']"
+              >Proveedor informal</a
+            >
+            <a class="dropdown-item" href="#">Almacén</a>
+            <a class="dropdown-item" href="#">Impuesto</a>
+          </div>
+        </li>
+
+        <!-- invoice menu  -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >Ventas</a
+          >
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Facturación</a>
+            <a class="dropdown-item" href="#">Devolución (NC)</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Contización</a>
+            <a class="dropdown-item" href="#">Pre-Factura</a>
+          </div>
+        </li>
+
+        <!-- cash menu  -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >Caja</a
+          >
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Recibos de Ingresos</a>
+            <a class="dropdown-item" href="#">Gastos menores</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Conteo de dinero</a>
+            <a class="dropdown-item" href="#">Cuadre de caja</a>
+          </div>
+        </li>
+
+        <!-- product menu  -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >Inventario</a
+          >
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Productos</a>
+            <a class="dropdown-item" href="#">Categorías</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Compras</a>
+            <a class="dropdown-item" href="#">Traslados</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Entradas</a>
+            <a class="dropdown-item" href="#">Salidas</a>
+          </div>
+        </li>
+
+        <!-- customer menu  -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >Cuentas x cobrar</a
+          >
+          <div class="dropdown-menu">
+            <a class="dropdown-item" [routerLink]="['customers']">Clientes</a>
+            <a class="dropdown-item" href="#">Estado de cuenta</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Antiguedad de saldo</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <ul class="navbar-nav ml-auto">
+        <ng-container *ngIf="!loggedIn(); else loggedin">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="register">Registro</a>
+          </li>
+        </ng-container>
+        <ng-template #loggedin>
+          <li class="nav-item">
+            <a class="nav-link" style="cursor: pointer" (click)="logout()"
+              >Logout</a
+            >
+          </li>
+        </ng-template>
+      </ul>
+    </div>
+  </nav>
+</div>

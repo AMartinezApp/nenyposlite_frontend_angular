@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@import "bootswatch/dist/yeti/variables";
+@import "bootstrap/scss/bootstrap";
+@import "bootswatch/dist/yeti/bootswatch";
+
+ 
+ 
+.ng-touched.ng-invalid:is(input,textarea),
+.ng-dirty.ng-invalid:is(input,textarea){
+  outline: 2px solid #bd0c0c;
+}
