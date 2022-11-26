@@ -10,8 +10,8 @@ export class IsLoggedInGuard implements CanActivate {
     
   }
 
-  canActivate( ):  boolean | UrlTree {
-    return this.autService.isLoggedIn() || this.router.parseUrl('/login');
+  canActivate():  boolean | UrlTree {
+    return this.autService.isLoggedIn() || this.router.parseUrl('auth/login');
   }
   
 }

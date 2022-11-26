@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { Injectable } from '@angular/core'; 
+import { PathRest } from 'src/app/commons/static/path-api'; 
 import { StoreI } from '../models/store';
 
 @Injectable({
@@ -10,31 +9,21 @@ import { StoreI } from '../models/store';
 export class StoreService {
   
   stores!: StoreI[];
-
-  URL_API: string = environment.API_URL;
-
+ 
   constructor(private httpClient: HttpClient) {}
 
   onSave(store: StoreI){
-    return this.httpClient.post<StoreI>(`${this.URL_API}/productsstores`,store);
+    return this.httpClient.post<StoreI>(PathRest.STORES,store);
   }
   onUpdate(store: StoreI){
-    return this.httpClient.put<StoreI>(`${this.URL_API}/productsstores/${store.id}`,store);
+    return this.httpClient.put<StoreI>(`${PathRest.STORES}/${store.id}`,store);
   }
   onDelete(requestId: number){
-    return this.httpClient.delete(`${this.URL_API}/productsstores/${requestId}`);  
+    return this.httpClient.delete(`${PathRest.STORES}/${requestId}`);  
   }
-
+  
   getAll() { 
-     return this.httpClient.get<any>(`${this.URL_API}/productsstores`);
+     return this.httpClient.get<any>(PathRest.STORES);
   }
-
-  getStore(requestId: number): Observable<StoreI | null> {
-    return this.httpClient.get<StoreI>(
-      `${this.URL_API}/productsstores/${requestId}`
-    );  
-  }
-
- 
  
 }

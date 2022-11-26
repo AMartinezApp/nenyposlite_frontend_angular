@@ -1,12 +1,18 @@
-<div class="row">
+<div  class="row">
   <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">ALMACÉN</div>
+    <div [ngStyle]="{ borderRadius: '5px' }" class="card ">
+      <div
+        class="card-header bg-primary text-light"
+        [ngStyle]="{ borderRadius: '5px' }"
+      >
+        ALMACÉN
+      </div>
       <div class="card-body">
         <form [formGroup]="storeProductForm" (submit)="onSave()">
           <!-- name field  -->
           <div class="form-floating mt-2">
             <input
+              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="name"
               formControlName="name"
@@ -36,39 +42,65 @@
             Se ha excedido el límite de carácteres
           </div>
           <input type="hidden" name="id" formControlName="id" />
-          <div class="d-grid gap-2 mt-2">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              [disabled]="storeProductForm.invalid"
-            >
-              G u a r d a r
-            </button>
+          <div class="row mt-1">
+            <div class="col-md-6">
+              <div class="d-grid gap-2 mt-2">
+                <a
+                  (click)="onNewDoc()"
+                  [ngStyle]="{ borderRadius: '5px' }"
+                  class="btn btn-info"
+                >
+                  N u e v o
+              </a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-grid gap-2 mt-2">
+                <button
+                  [ngStyle]="{ borderRadius: '5px' }"
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="storeProductForm.invalid"
+                >
+                  G u a r d a r
+                </button>
+              </div>
+            </div>
           </div>
         </form>
       </div>
     </div>
   </div>
 
-  <div class="col-md-8">
-    <table class="table table-hover">
-      <thead>
+  <div [ngStyle]="{ borderRadius: '5px' }" class="col-md-8">
+    <table
+       class="table table-bordered border-primary table-sm table-hover mt-1"
+    >
+      <thead class="bg-primary text-light">
         <tr>
-          <th>Almacén</th>
+          <th class="col-sm-6">Almacén</th>
           <th>Actualizado</th>
-          <th>Sub-menú</th>
+          <th class="col-sm-3 text-end">Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let store of storesService.stores">
           <td>{{ store.name | uppercase }}</td>
           <td>{{ store.updatedAt | date | uppercase }}</td>
-          <td>
-            <a (click)="onEdit(store)" class="btn btn-secondary btn-sm">
-              <i class="material-icons">edit</i>
+          <td class="text-end">
+            <a
+              [ngStyle]="{ borderRadius: '5px' }"
+              (click)="onEdit(store)"
+              class="btn btn-primary btn-sm"
+            >
+              Editar
             </a>
-            <a (click)="onDelete(store.id)" class="btn btn-danger btn-sm">
-              <i class="material-icons">delete</i>
+            <a
+              [ngStyle]="{ borderRadius: '5px' }"
+              (click)="onDelete(store.id)"
+              class="btn btn-danger btn-sm mx-1"
+            >
+              Borrar
             </a>
           </td>
         </tr>

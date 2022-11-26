@@ -1,71 +1,72 @@
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
 
-    <!-- Icon -->
-    <div class="fadeIn first">
-      <!-- <img src="https://www.b-cube.in/wp-content/uploads/2014/05/aditya-300x177.jpg" id="icon" alt="User Icon" /> -->
-      <h1>NenyPos lite</h1>
-    </div>
-
-    <!-- Login Form -->
-
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <input
-        type="email"
-        formControlName="email"
-        class="fadeIn second"
-        name="email"
-        placeholder="correo"
-        required
-      />
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
       
-      <div
-        *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']"
-        class="alert alert-danger" role="alert"
-      >
-        El correo es requerido
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <!-- <img src="https://www.b-cube.in/wp-content/uploads/2014/05/aditya-300x177.jpg" id="icon" alt="User Icon" /> -->
+            <h1>NenyPos lite</h1>
+          </div>
+      
+          <!-- Login Form -->
+      
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <input
+              type="email"
+              formControlName="email"
+              class="fadeIn second"
+              name="email"
+              placeholder="correo"
+              required
+            />
+            
+            <div
+              *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']"
+              class="alert alert-danger" role="alert"
+            >
+              El correo es requerido
+            </div>
+            <div
+              *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['email']"
+              class="alert alert-danger"
+            >
+              No es un correo válido
+            </div>
+      
+            <input
+              type="password"
+              formControlName="password"
+              class="fadeIn third"
+              name="password"
+              placeholder="clave"
+              required
+            />
+            <div
+              *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              La clave es requerida
+            </div>
+            <div
+              *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 4 carácteres como mínimo
+            </div>
+      
+            <button
+              type="submit"
+              class="fadeIn fourth"
+              [disabled]="loginForm.invalid"
+            >
+              Entrar
+            </button>
+          </form>
+      
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <a class="underlineHover" href="#">Go to the Site</a>
+          </div>
+        </div>
       </div>
-      <div
-        *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['email']"
-        class="alert alert-danger"
-      >
-        No es un correo válido
-      </div>
-
-      <input
-        type="password"
-        formControlName="password"
-        class="fadeIn third"
-        name="password"
-        placeholder="clave"
-        required
-      />
-      <div
-        *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']"
-        class="alert alert-danger"
-      >
-        La clave es requerida
-      </div>
-      <div
-        *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['minlength']"
-        class="alert alert-danger"
-      >
-        Se requiere 4 carácteres como mínimo
-      </div>
-
-      <button
-        type="submit"
-        class="fadeIn fourth"
-        [disabled]="loginForm.invalid"
-      >
-        Entrar
-      </button>
-    </form>
-
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" href="#">Go to the Site</a>
-    </div>
-  </div>
-</div>

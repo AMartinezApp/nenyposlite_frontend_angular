@@ -1,51 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { ILogin, IUserResponse } from '../models/auth.models';
-import { environment } from 'src/environments/environment';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+ 
+import { Observable, BehaviorSubject, tap, throwError } from 'rxjs';
+import { ILogin, IUserResponse } from '../models/auth.models'; 
+import { PathRest } from '../../commons/static/path-api'; 
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  API_URL: string = environment.API_URL;
+ 
   authSubject = new BehaviorSubject(false);
 
   private token!: string;
 
-  constructor(private httpClient: HttpClient) {}
-
-  // register(user: UserI): Observable<JwtResponseI> {
-  //   return this.httpClient
-  //     .post<JwtResponseI>(`${this.AUTH_SERVER}/auth/register`, user)
-  //     .pipe(
-  //       tap((res: JwtResponseI) => {
-  //         if (res) {
-  //           // saveToken
-  //           this.saveToken(res.token);
-  //         }
-  //       })
-  //     );
-  // }
+  constructor(private httpClient: HttpClient) {} 
 
   login(user: ILogin): Observable<IUserResponse> {
     return this.httpClient
-      .post<IUserResponse>(`${this.API_URL}/auth/login`, user)
+      .post<IUserResponse>(PathRest.POST_LOGIN, user)
       .pipe(
         tap((res: IUserResponse) => {
-          console.log(user);
           if (res) {
             // saveToken
             this.saveToken(res.token);
+            
           }
-        })
+        }) 
       );
   }
 
   logout() {
     this.token = '';
     localStorage.removeItem('ACCESS_TOKEN');
+    localStorage.removeItem('USER_ID');
   }
 
   private saveToken(token: string): void {
@@ -61,4 +49,6 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('ACCESS_TOKEN');
   }
+
+   
 }

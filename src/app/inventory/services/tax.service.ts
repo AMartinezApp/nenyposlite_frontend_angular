@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { PathRest } from 'src/app/commons/static/path-api';
 import { environment } from 'src/environments/environment';
  
 import { TaxI } from '../models/tax';
@@ -9,23 +10,21 @@ import { TaxI } from '../models/tax';
 })
 export class TaxService {
 
-  tax!: TaxI[];
-
-  URL_API: string = environment.API_URL;
+  tax!: TaxI[]; 
 
   constructor(private httpClient: HttpClient) {}
 
   onSave(tax: TaxI){
-    return this.httpClient.post<TaxI>(`${this.URL_API}/productstaxes`,tax);
+    return this.httpClient.post<TaxI>(PathRest.TAXES,tax);
   }
   onUpdate(tax: TaxI){
-    return this.httpClient.put<TaxI>(`${this.URL_API}/productstaxes/${tax.id}`,tax);
+    return this.httpClient.put<TaxI>(`${PathRest.TAXES}/${tax.id}`,tax);
   }
   onDelete(requestId: number){
-    return this.httpClient.delete(`${this.URL_API}/productstaxes/${requestId}`);  
+    return this.httpClient.delete(`${PathRest.TAXES}/${requestId}`);  
   }
 
   getAll() { 
-     return this.httpClient.get<any>(`${this.URL_API}/productstaxes`);
+     return this.httpClient.get<any>(PathRest.TAXES);
   }
 }

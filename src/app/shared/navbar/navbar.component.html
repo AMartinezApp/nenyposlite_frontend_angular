@@ -25,8 +25,8 @@
 
                 <a class="dropdown-item" href="#">NCF</a>
                 <a class="dropdown-item">Proveedor informal</a>
-                <a class="dropdown-item" [routerLink]="['/store']" >Almacén</a>
-                <a class="dropdown-item" [routerLink]="['/tax']">Impuesto</a>
+                <a class="dropdown-item" [routerLink]="['inventory/store']" >Almacén</a>
+                <a class="dropdown-item" [routerLink]="['inventory/tax']">Impuesto</a>
               </div>
             </li>
 
@@ -82,8 +82,8 @@
                 >Inventario</a
               >
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Productos</a>
-                <a class="dropdown-item" href="#">Categorías</a>
+                <a class="dropdown-item" [routerLink]="['inventory/product']">Productos</a>
+                <a class="dropdown-item" [routerLink]="['inventory/category']">Categorías</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Compras</a>
                 <a class="dropdown-item" href="#">Traslados</a>

@@ -40,6 +40,9 @@ export class StoreComponent implements OnInit {
       ]),
     });
   }
+  onNewDoc() {
+    this.storeProductForm.reset();
+  }
 
   onSave(): void {
     if (this.storeProductForm.value.id > 0) {
@@ -60,7 +63,7 @@ export class StoreComponent implements OnInit {
               this.getAll();
               this.storeProductForm.reset();
             });
-            this.alertDone();
+          this.alertDone();
         }
       });
     } else {
@@ -80,7 +83,7 @@ export class StoreComponent implements OnInit {
     }).unsubscribe;
     // Unsubscribing from the observable for optimization of memory usage
   }
-  
+
   onDelete(id: number): void {
     Swal.fire({
       title: 'Borrando el documento',
@@ -117,6 +120,4 @@ export class StoreComponent implements OnInit {
       timer: 1200,
     });
   }
-
-
 }

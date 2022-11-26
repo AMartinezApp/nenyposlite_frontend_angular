@@ -1,1 +1,105 @@
-<p>category works!</p>
+<div class="row">
+  
+    <div class="col-md-4">
+      <div [ngStyle]="{ borderRadius: '5px' }" class="card">
+        <div class="card-header bg-primary text-light"
+        [ngStyle]="{ borderRadius: '5px' }">CATEGORÍAS</div>
+        <div class="card-body">
+          <form [formGroup]="categoryProductForm" (submit)="onSave()">
+            <!-- name field  -->
+            <div class="form-floating mt-2">
+              <input
+              [ngStyle]="{ borderRadius: '5px' }"
+                required
+                name="name"
+                formControlName="name"
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Nombre"
+              />
+              <label for="floatingInput">Nombre</label>
+            </div>
+            <div
+              *ngIf="categoryProductForm.get('name')?.touched && categoryProductForm.get('name')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El nombre es requerido
+            </div>
+            <div
+              *ngIf="categoryProductForm.get('name')?.touched && categoryProductForm.get('name')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="categoryProductForm.get('name')?.touched && categoryProductForm.get('name')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+            <input type="hidden" name="id" formControlName="id" />
+            <div class="row mt-1">
+              <div class="col-md-6">
+                <div class="d-grid gap-2 mt-2">
+                  <a
+                    (click)="onNewDoc()"
+                    [ngStyle]="{ borderRadius: '5px' }"
+                    class="btn btn-info"
+                  >
+                    N u e v o
+                </a>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="d-grid gap-2 mt-2">
+                  <button
+                    [ngStyle]="{ borderRadius: '5px' }"
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="categoryProductForm.invalid"
+                  >
+                    G u a r d a r
+                  </button>
+                </div>
+              </div>
+            </div>
+             
+          </form>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-8">
+      <table class="table table-bordered border-primary table-sm table-hover mt-1">
+        <thead class="bg-primary text-light">
+          <tr>
+            <th class="col-sm-6">Categpría</th>
+            <th>Actualizado</th>
+            <th class="col-sm-3 text-end">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categoryService.categories">
+            <td>{{ category.name | uppercase }}</td>
+            <td>{{ category.updatedAt | date | uppercase }}</td>
+            <td class="text-end">
+              <a
+              [ngStyle]="{ borderRadius: '5px' }" 
+              (click)="onEdit(category)" 
+              class="btn btn-primary btn-sm">
+                Editar
+              </a>
+              <a [ngStyle]="{ borderRadius: '5px' }" 
+              (click)="onDelete(category.id)" 
+              class="btn btn-danger btn-sm mx-1">
+                Borrar
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+</div>
+  

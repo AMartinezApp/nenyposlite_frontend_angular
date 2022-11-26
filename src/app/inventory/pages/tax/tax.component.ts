@@ -38,6 +38,10 @@ export class TaxComponent implements OnInit {
     });
   }
 
+  onNewDoc(){
+    this.taxProductForm.reset();
+  }
+
   onSave(): void {
     if (this.taxProductForm.value.id > 0) {
       Swal.fire({
