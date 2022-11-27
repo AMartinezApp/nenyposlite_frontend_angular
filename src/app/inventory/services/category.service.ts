@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PathRest } from 'src/app/commons/static/path-api';
-import { environment } from 'src/environments/environment';
 import { CategoryI } from '../models/category';
 
 

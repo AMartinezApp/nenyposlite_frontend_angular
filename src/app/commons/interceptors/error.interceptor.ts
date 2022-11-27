@@ -20,7 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor{
                     [409].indexOf(err.status) !== -1
                 ){
                     this.authService.logout();
-                    this.router.navigateByUrl('/login');
+                    this.router.navigateByUrl('auth/login');
                 }
                 return throwError(err)
 

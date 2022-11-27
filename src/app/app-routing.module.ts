@@ -13,6 +13,8 @@ const routes: Routes = [
   { path: 'inventory', loadChildren: () => import('./inventory/inventory.module').then(m => m.InventoryModule), canActivate: [IsLoggedInGuard] }, 
    // Auth modules
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
+  // Invoice Module
+  { path: 'invoice', loadChildren: () => import('./invoice/invoice.module').then(m => m.InvoiceModule)},
    
   {path: '**',component: PagenotfoundComponent}
 ];

@@ -36,6 +36,7 @@ export class CategoryComponent implements OnInit {
   onNewDoc() {
     this.categoryProductForm.reset();
   }
+  
   onSave(): void {
     if (this.categoryProductForm.value.id > 0) {
       Swal.fire({

@@ -1,7 +1,7 @@
 <ng-container *ngIf="!isLoggedIn(); else loggedin"> </ng-container>
 <ng-template #loggedin>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand " href="#">NenyPos Lite</a>
+    <a class="navbar-brand  mx-2" href="#">NenyPos Lite</a>
 
      
       <div class="collapse navbar-collapse" id="navbarColor01">
@@ -19,12 +19,12 @@
                 >Archivo</a
               >
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Configuración</a>
-                <a class="dropdown-item" href="#">Usuarios</a>
+                <a class="dropdown-item" [routerLink]="['auth/setting']">Configuración</a>
+                <a class="dropdown-item" [routerLink]="['auth/register']">Usuarios</a>
                 <div class="dropdown-divider"></div>
 
-                <a class="dropdown-item" href="#">NCF</a>
-                <a class="dropdown-item">Proveedor informal</a>
+                <a class="dropdown-item" [routerLink]="['invoice/ncf']">NCF</a>
+                <a class="dropdown-item" [routerLink]="['inventory/supplier']">Proveedor informal</a>
                 <a class="dropdown-item" [routerLink]="['inventory/store']" >Almacén</a>
                 <a class="dropdown-item" [routerLink]="['inventory/tax']">Impuesto</a>
               </div>
@@ -42,8 +42,8 @@
                 >Ventas</a
               >
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Facturación</a>
-                <a class="dropdown-item" href="#">Devolución (NC)</a>
+                <a class="dropdown-item" [routerLink]="['invoice/invoicelist']">Facturación</a>
+                <a class="dropdown-item"  [routerLink]="['invoice/devolucionnc']">Devolución (NC)</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Contización</a>
                 <a class="dropdown-item" href="#">Pre-Factura</a>

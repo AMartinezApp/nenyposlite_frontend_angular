@@ -1,0 +1,343 @@
+<div [ngStyle]="{ borderRadius: '5px' }" class="card">
+  <div
+    class="card-header bg-primary text-light"
+    [ngStyle]="{ borderRadius: '5px' }"
+  >
+    CONFIGURACIÓN
+  </div>
+  <div class="card-body">
+    <form [formGroup]="settingForm">
+      <div class="row">
+        <!-- column one -->
+        <div class="col-md-6">
+          <!-- name field  -->
+          <div class="form-floating mt-2">
+            <input
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="name"
+              formControlName="name"
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Nombre"
+            />
+            <label for="floatingInput">Nombre</label>
+            <div
+              *ngIf="settingForm.get('name')?.touched && settingForm.get('name')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="settingForm.get('name')?.touched && settingForm.get('name')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="settingForm.get('name')?.touched && settingForm.get('name')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+          </div>
+
+          <!-- rnc field  -->
+          <div class="form-floating mt-2">
+            <input
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="identity"
+              formControlName="identity"
+              type="text"
+              class="form-control"
+              id="identity"
+              placeholder="RNC"
+            />
+            <label for="floatingInput">RNC</label>
+            <div
+              *ngIf="settingForm.get('identity')?.touched && settingForm.get('identity')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="settingForm.get('identity')?.touched && settingForm.get('identity')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="settingForm.get('identity')?.touched && settingForm.get('identity')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+          </div>
+
+          <!-- phone field  -->
+          <div class="form-floating mt-2">
+            <input
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="phone"
+              formControlName="phone"
+              type="text"
+              class="form-control"
+              id="phone"
+              placeholder="Teléfono"
+            />
+            <label for="floatingInput">Teléfono</label>
+            <div
+              *ngIf="settingForm.get('phone')?.touched && settingForm.get('phone')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="settingForm.get('phone')?.touched && settingForm.get('phone')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="settingForm.get('phone')?.touched && settingForm.get('phone')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+          </div>
+
+          <!-- email field  -->
+          <div class="form-floating mt-2">
+            <input
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="email"
+              formControlName="email"
+              type="text"
+              class="form-control"
+              id="email"
+              placeholder="Correo"
+            />
+            <label for="floatingInput">Correo</label>
+            <div
+              *ngIf="settingForm.get('email')?.touched && settingForm.get('email')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="settingForm.get('email')?.touched && settingForm.get('email')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="settingForm.get('email')?.touched && settingForm.get('email')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+          </div>
+
+          <!-- address field  -->
+          <div class="form-floating mt-2">
+            <input
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="address"
+              formControlName="address"
+              type="text"
+              class="form-control"
+              id="address"
+              placeholder="Dirección"
+            />
+            <label for="floatingInput">Dirección</label>
+            <div
+              *ngIf="settingForm.get('address')?.touched && settingForm.get('address')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="settingForm.get('address')?.touched && settingForm.get('address')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="settingForm.get('address')?.touched && settingForm.get('address')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+          </div>
+
+          <!-- city field  -->
+          <div class="form-floating mt-2">
+            <input
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="city"
+              formControlName="city"
+              type="text"
+              class="form-control"
+              id="city"
+              placeholder="Ciudad"
+            />
+            <label for="floatingInput">Ciudad</label>
+            <div
+              *ngIf="settingForm.get('city')?.touched && settingForm.get('city')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="settingForm.get('city')?.touched && settingForm.get('city')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="settingForm.get('city')?.touched && settingForm.get('city')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+          </div>
+        </div>
+
+        <!-- column tow -->
+        <div class="col-md-6">
+          <!-- note_sale field  -->
+          <div class="form-floating mt-2">
+            <textarea
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="note_sales"
+              formControlName="note_sales"
+              type="text"
+              class="form-control"
+              id="note_sales"
+              placeholder="Nota para ventas"
+              rows="3"
+            ></textarea>
+
+            <label for="floatingInput">Nota para ventas</label>
+            <div
+              *ngIf="settingForm.get('note_sales')?.touched && settingForm.get('note_sales')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="settingForm.get('note_sales')?.touched && settingForm.get('note_sales')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="settingForm.get('note_sales')?.touched && settingForm.get('note_sales')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+          </div>
+
+          <!-- note_receipts field  -->
+          <div class="form-floating mt-2">
+            <textarea
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="note_receipts"
+              formControlName="note_receipts"
+              type="text"
+              class="form-control"
+              id="note_receipts"
+              placeholder="Nota para recibos"
+              rows="3"
+            ></textarea>
+
+            <label for="floatingInput">Nota para recibos</label>
+            <div
+              *ngIf="settingForm.get('note_receipts')?.touched && settingForm.get('note_receipts')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="settingForm.get('note_receipts')?.touched && settingForm.get('note_receipts')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="settingForm.get('note_receipts')?.touched && settingForm.get('note_receipts')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+          </div>
+
+          <!-- footer field  -->
+          <div class="form-floating mt-2">
+            <textarea
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="footer"
+              formControlName="footer"
+              type="text"
+              class="form-control"
+              id="footer"
+              placeholder="Pie de página (venta, recibo, compra)"
+              rows="3"
+            ></textarea>
+
+            <label for="floatingInput"
+              >Pie de página (venta, recibo, compra)</label
+            >
+            <div
+              *ngIf="settingForm.get('footer')?.touched && settingForm.get('footer')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="settingForm.get('footer')?.touched && settingForm.get('footer')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="settingForm.get('footer')?.touched && settingForm.get('footer')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <input type="hidden" name="id" formControlName="id" />
+      <input type="hidden" name="logo" formControlName="logo" />
+
+      <div class="row mt-1">
+        <div class="col-md-6">
+          <div class="d-grid gap-2 mt-2">
+            <button
+              [ngStyle]="{ borderRadius: '5px' }"
+              type="submit"
+              class="btn btn-primary"
+              (click)="onSave()"
+              [disabled]="settingForm.invalid"
+            >
+              G u a r d a r
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

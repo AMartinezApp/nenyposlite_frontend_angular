@@ -9,6 +9,7 @@ import { StoreComponent } from './pages/store/store.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { ProductComponent } from './pages/product/product.component';
 import { ProductPipe } from './pipe/product.pipe';
+import { SupplierComponent } from './pages/supplier/supplier.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ProductPipe } from './pipe/product.pipe';
     StoreComponent,
     CategoryComponent,
     ProductComponent,
-    ProductPipe
+    ProductPipe,
+    SupplierComponent
   ],
   imports: [CommonModule, InventoryRoutingModule, ReactiveFormsModule],
 })
