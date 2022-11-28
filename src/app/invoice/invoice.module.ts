@@ -7,6 +7,8 @@ import { NcftypeComponent } from './pages/ncftype/ncftype.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { InvoicelistComponent } from './pages/invoicelist/invoicelist.component';
 import { CreditsentryComponent } from './pages/creditsentry/creditsentry.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomerPipe } from './pipe/customer.pipe';
 
 
 @NgModule({
@@ -15,11 +17,14 @@ import { CreditsentryComponent } from './pages/creditsentry/creditsentry.compone
     NcftypeComponent,
     InvoiceComponent,
     InvoicelistComponent,
-    CreditsentryComponent
+    CreditsentryComponent,
+    CustomerPipe
   ],
   imports: [
     CommonModule,
-    InvoiceRoutingModule
+    InvoiceRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class InvoiceModule { }

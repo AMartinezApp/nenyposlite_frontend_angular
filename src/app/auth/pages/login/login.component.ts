@@ -34,8 +34,7 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     this.authService.login(this.loginForm.value).subscribe((res) => {
       let dataResponse: UserI = res.user;
-      console.log(dataResponse);
-       // saveUser
+       
        localStorage.setItem('USER_ID',  `${dataResponse.id}` );
       this.router.navigateByUrl('/home');
     },error=>{

@@ -223,7 +223,7 @@
                           >
                             <option
                               [value]="store.id"
-                              *ngFor="let store of storeService.stores"
+                              *ngFor="let store of stores"
                             >
                               {{ store.name }}
                             </option>
@@ -245,7 +245,7 @@
                           >
                             <option selected></option>
                             <option
-                              *ngFor="let tax of taxService.tax"
+                              *ngFor="let tax of taxs"
                               [value]="tax.id"
                             >
                               {{ tax.name }}

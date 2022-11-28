@@ -19,6 +19,7 @@ import Swal from 'sweetalert2';
 })
 export class StoreComponent implements OnInit {
   storeProductForm!: FormGroup;
+  stores!: StoreI[];
 
   constructor(
     private readonly fb: FormBuilder,
@@ -79,7 +80,7 @@ export class StoreComponent implements OnInit {
 
   getAll() {
     this.storesService.getAll().subscribe((res) => {
-      this.storesService.stores = res.result;
+      this.stores = res;
     }).unsubscribe;
     // Unsubscribing from the observable for optimization of memory usage
   }

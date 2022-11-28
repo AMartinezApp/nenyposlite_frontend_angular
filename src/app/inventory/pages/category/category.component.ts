@@ -56,16 +56,15 @@ export class CategoryComponent implements OnInit {
             .subscribe((res) => {
               this.getAll();
               this.categoryProductForm.reset();
+              this.alertDone();
             });
-            this.alertDone();
         }
       });
     } else {
-      this.categoryService
-        .onSave(this.categoryProductForm.value)
+      this.categoryService.onSave(this.categoryProductForm.value)
         .subscribe((res) => {
           this.getAll();
-          this.categoryProductForm.reset();
+          this.onNewDoc();
           this.alertDone();
         });
     }

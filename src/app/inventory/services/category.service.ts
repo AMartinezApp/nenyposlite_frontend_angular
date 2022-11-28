@@ -4,28 +4,25 @@ import { Observable } from 'rxjs';
 import { PathRest } from 'src/app/commons/static/path-api';
 import { CategoryI } from '../models/category';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
-  
-  
-  
   constructor(private httpClient: HttpClient) {}
 
-  onSave(category: CategoryI){
-    return this.httpClient.post<CategoryI>(PathRest.CATEGORIES,category);
+  getAll(): Observable<CategoryI[]> {
+    return this.httpClient.get<CategoryI[]>(PathRest.CATEGORIES);
   }
-  onUpdate(category: CategoryI){
-    return this.httpClient.put<CategoryI>(`${PathRest.CATEGORIES}/${category.id}`,category);
+  onSave(category: CategoryI): Observable<CategoryI[]> {
+    return this.httpClient.post<CategoryI[]>(PathRest.CATEGORIES, category);
   }
-  onDelete(requestId: number){
-    return this.httpClient.delete(`${PathRest.CATEGORIES}/${requestId}`);  
+  onUpdate(category: CategoryI): Observable<CategoryI[]> {
+    return this.httpClient.put<CategoryI[]>(
+      `${PathRest.CATEGORIES}/${category.id}`,
+      category
+    );
   }
-  
-  getAll(): Observable<CategoryI[]> { 
-     return this.httpClient.get<CategoryI[]>(PathRest.CATEGORIES);
+  onDelete(requestId: number) {
+    return this.httpClient.delete(`${PathRest.CATEGORIES}/${requestId}`);
   }
- 
 }

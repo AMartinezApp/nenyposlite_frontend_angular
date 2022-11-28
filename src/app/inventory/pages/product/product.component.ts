@@ -8,6 +8,8 @@ import {
 import Swal from 'sweetalert2';
 import { CategoryI } from '../../models/category';
 import { ProductI } from '../../models/product';
+import { StoreI } from '../../models/store';
+import { TaxI } from '../../models/tax';
 import { CategoryService } from '../../services/category.service';
 import { ProductService } from '../../services/product.service';
 import { StoreService } from '../../services/store.service';
@@ -23,6 +25,8 @@ export class ProductComponent implements OnInit {
   headers = ['Código Barra', 'Nombre', 'Precio', 'Categoría', 'Almacén', 'Acciones'];
   
   categories: CategoryI[]=[]; 
+  stores!: StoreI[];
+  taxs: TaxI[]=[]; 
 
   products: ProductI[]=[];
 
@@ -90,7 +94,6 @@ export class ProductComponent implements OnInit {
   onSave(): void {
     this.productForm.patchValue({ iduser: localStorage.getItem('USER_ID') });
     let closeModal = document.getElementById('cancel');
-    console.log(this.productForm.value);
     if (this.productForm.value.id > 0) {
       // modifying data
       Swal.fire({
@@ -119,7 +122,6 @@ export class ProductComponent implements OnInit {
       this.productService.onSave(this.productForm.value).subscribe((res) => {
         this.getAll();
         this.productForm.reset();
-
         closeModal?.click();
         this.alertDone();
       });
@@ -180,14 +182,14 @@ export class ProductComponent implements OnInit {
 
   getAllStore() {
     this.storeService.getAll().subscribe((res) => {
-      this.storeService.stores = res.result;
+      this.stores = res;
     }).unsubscribe;
     // Unsubscribing from the observable for optimization of memory usage
   }
 
   getAllTax() {
     this.taxService.getAll().subscribe((res) => {
-      this.taxService.tax = res.result;
+      this.taxs = res;
     }).unsubscribe;
     // Unsubscribing from the observable for optimization of memory usage
   }

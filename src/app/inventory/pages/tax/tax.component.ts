@@ -12,6 +12,8 @@ import { TaxService } from '../../services/tax.service';
 export class TaxComponent implements OnInit {
 
        taxProductForm!: FormGroup;
+       taxs: TaxI[]=[]; 
+
 
   constructor(
     private readonly fb: FormBuilder,
@@ -77,8 +79,7 @@ export class TaxComponent implements OnInit {
 
   getAll() {
     this.taxService.getAll().subscribe((res) => {
-      console.log(res);
-      this.taxService.tax = res.result;
+      this.taxs = res;
     }).unsubscribe;
     // Unsubscribing from the observable for optimization of memory usage
   }

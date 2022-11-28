@@ -16,9 +16,11 @@ export class ProductPipe implements PipeTransform {
       (product) =>
         product.name.toLowerCase().includes(search.toLowerCase()) ||
         product.barcode.toLowerCase().includes(search.toLowerCase()) ||
-        product.products_category.name.toLowerCase().includes(search.toLowerCase()) ||
+        product.products_category.name
+          .toLowerCase()
+          .includes(search.toLowerCase()) ||
         product.products_store.name.toLowerCase().includes(search.toLowerCase())
     );
-    return resultFiltered.slice(page, page + 5);
+    return resultFiltered.slice(page, page + 10);
   }
 }

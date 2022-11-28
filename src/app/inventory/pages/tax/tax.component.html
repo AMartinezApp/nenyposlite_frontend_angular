@@ -122,7 +122,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let tax of taxService.tax">
+          <tr *ngFor="let tax of taxs">
             <td>{{ tax.name | uppercase }}</td>
             <td class="text-end">{{ tax.value | number  }}</td>
             <td class="text-end">

@@ -84,7 +84,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let store of storesService.stores">
+        <tr *ngFor="let store of stores">
           <td>{{ store.name | uppercase }}</td>
           <td>{{ store.updatedAt | date | uppercase }}</td>
           <td class="text-end">
