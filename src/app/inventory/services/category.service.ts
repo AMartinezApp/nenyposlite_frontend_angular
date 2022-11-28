@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { PathRest } from 'src/app/commons/static/path-api';
 import { CategoryI } from '../models/category';
 
@@ -9,7 +10,7 @@ import { CategoryI } from '../models/category';
 })
 export class CategoryService {
   
-  categories!: CategoryI[]; 
+  
   
   constructor(private httpClient: HttpClient) {}
 
@@ -23,8 +24,8 @@ export class CategoryService {
     return this.httpClient.delete(`${PathRest.CATEGORIES}/${requestId}`);  
   }
   
-  getAll() { 
-     return this.httpClient.get<any>(PathRest.CATEGORIES);
+  getAll(): Observable<CategoryI[]> { 
+     return this.httpClient.get<CategoryI[]>(PathRest.CATEGORIES);
   }
  
 }

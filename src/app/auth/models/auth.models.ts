@@ -1,23 +1,35 @@
-export interface ILogin {
+export interface LoginI {
   email: string;
   password: string;
 }
 
-export interface IUser {
+export interface UserI {
   id: number;
   name: string;
   phone: string;
+  email: string;
+  password: string;
+  users_role:{
+    id: number;
+    name: string;
+  },
   idrole: number;
-  createAt: string;
-  updateAt: string;
+  status?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
-export interface IUserResponse {
+export interface RoleI{
+  id: number;
+  name: string;
+}
+
+export interface UserResponseI {
   token: string;
-  user: IUser;
+  user: UserI;
 }
 
-export interface IUserErrorResponse {
+export interface UserErrorResponseI {
   status: string;
   result: string;
 }

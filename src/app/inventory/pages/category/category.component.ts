@@ -12,6 +12,7 @@ import { CategoryService } from '../../services/category.service';
 export class CategoryComponent implements OnInit {
 
   categoryProductForm!: FormGroup;
+  categories: CategoryI[]=[];
 
   constructor(
     private readonly fb: FormBuilder,
@@ -72,9 +73,8 @@ export class CategoryComponent implements OnInit {
 
   getAll() {
     this.categoryService.getAll().subscribe((res) => {
-      this.categoryService.categories = res.result;
-    }).unsubscribe;
-    // Unsubscribing from the observable for optimization of memory usage
+      this.categories = res;
+    });
   }
   
   onDelete(id: number): void {

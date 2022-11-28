@@ -1,1 +1,305 @@
-<p>register works!</p>
+<div class="row">
+  <div class="col-md-4">
+    <div [ngStyle]="{ borderRadius: '5px' }" class="card">
+      <div
+        class="card-header bg-primary text-light"
+        [ngStyle]="{ borderRadius: '5px' }"
+      >
+        USUARIO
+      </div>
+      <div class="card-body">
+        <form [formGroup]="userRegisterForm" (submit)="onSave()">
+          <!-- email field  -->
+          <div class="form-floating mt-2">
+            <input
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="email"
+              formControlName="email"
+              type="text"
+              class="form-control"
+              id="email"
+              placeholder="Correo / Usuario"
+            />
+            <label for="floatingInput">Correo / Usuario</label>
+            <!-- validation-error -->
+            <div
+              *ngIf="userRegisterForm.get('email')?.touched && userRegisterForm.get('email')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="userRegisterForm.get('email')?.touched && userRegisterForm.get('email')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="userRegisterForm.get('email')?.touched && userRegisterForm.get('email')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+            <!-- validation-error -->
+          </div>
+
+          <!-- password field  -->
+          <div class="form-floating mt-2">
+            <input
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="password"
+              formControlName="password"
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Clave"
+            />
+            <label for="floatingInput">Clave</label>
+            <!-- validation-error -->
+            <div
+              *ngIf="userRegisterForm.get('password')?.touched && userRegisterForm.get('password')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="userRegisterForm.get('password')?.touched && userRegisterForm.get('password')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="userRegisterForm.get('password')?.touched && userRegisterForm.get('password')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+            <!-- validation-error -->
+          </div>
+
+           <!-- confirm field  -->
+           <div class="form-floating mt-2">
+            <input
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="confirm"
+              formControlName="confirm"
+              type="password"
+              class="form-control"
+              id="confirm"
+              placeholder="Confirmar clave"
+            />
+            <label for="floatingInput">Confirmar clave</label>
+            <!-- validation-error -->
+            <div
+              *ngIf="userRegisterForm.get('confirm')?.touched && userRegisterForm.get('confirm')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="userRegisterForm.get('confirm')?.touched && userRegisterForm.get('confirm')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="userRegisterForm.get('confirm')?.touched && userRegisterForm.get('confirm')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+            <div>
+                <div
+              *ngIf="userRegisterForm.get('confirm')?.errors?.['noMatch']"
+              class="alert alert-danger"
+            >
+              Las claves digitadas no coinciden
+            </div>
+                
+            </div>
+            <!-- validation-error -->
+          </div>
+
+          <!-- idrole field  -->
+          <div class="form-floating mt-2">
+            <select
+              [ngStyle]="{ borderRadius: '5px' }"
+              class="form-select"
+              name="idrole"
+              formControlName="idrole"
+              placeholder="Rol"
+            >
+              <!-- <option selected></option> -->
+              <option *ngFor="let rol of roles" [value]="rol.id">
+                {{ rol.name }}
+              </option>
+            </select>
+
+            <label for="floatingInput">Rol</label>
+            <!-- validation-error -->
+            <div
+              *ngIf="userRegisterForm.get('idrole')?.touched && userRegisterForm.get('idrole')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="userRegisterForm.get('idrole')?.touched && userRegisterForm.get('idrole')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="userRegisterForm.get('idrole')?.touched && userRegisterForm.get('idrole')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+            <!-- validation-error -->
+          </div>
+
+          <!-- name field  -->
+          <div class="form-floating mt-2">
+            <input
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="name"
+              formControlName="name"
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Nombre"
+            />
+            <label for="floatingInput">Nombre</label>
+            <!-- validation-error -->
+            <div
+              *ngIf="userRegisterForm.get('name')?.touched && userRegisterForm.get('name')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="userRegisterForm.get('name')?.touched && userRegisterForm.get('name')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="userRegisterForm.get('name')?.touched && userRegisterForm.get('name')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+            <!-- validation-error -->
+          </div>
+
+          <!-- phone field  -->
+          <div class="form-floating mt-2">
+            <input
+              [ngStyle]="{ borderRadius: '5px' }"
+              required
+              name="phone"
+              formControlName="phone"
+              type="text"
+              class="form-control"
+              id="phone"
+              placeholder="Teléfono"
+            />
+            <label for="floatingInput">Teléfono</label>
+            <!-- validation-error -->
+            <div
+              *ngIf="userRegisterForm.get('phone')?.touched && userRegisterForm.get('phone')?.errors?.['required']"
+              class="alert alert-danger"
+            >
+              El campo es requerido
+            </div>
+            <div
+              *ngIf="userRegisterForm.get('phone')?.touched && userRegisterForm.get('phone')?.errors?.['minlength']"
+              class="alert alert-danger"
+            >
+              Se requiere 5 carácteres como mínimo
+            </div>
+            <div
+              *ngIf="userRegisterForm.get('phone')?.touched && userRegisterForm.get('phone')?.errors?.['maxlength']"
+              class="alert alert-danger"
+            >
+              Se ha excedido el límite de carácteres
+            </div>
+            <!-- validation-error -->
+          </div>
+
+          <input type="hidden" name="id" formControlName="id" />
+
+          <div class="row mt-1">
+            <div class="col-md-6">
+              <div class="d-grid gap-2 mt-2">
+                <a
+                  (click)="onNewDoc()"
+                  [ngStyle]="{ borderRadius: '5px' }"
+                  class="btn btn-info"
+                >
+                  N u e v o
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-grid gap-2 mt-2">
+                <button
+                  [ngStyle]="{ borderRadius: '5px' }"
+                  (click)="onSave()"
+                  class="btn btn-primary"
+                  [disabled]="userRegisterForm.invalid"
+                >
+                  G u a r d a r
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <table
+      class="table table-bordered border-primary table-sm table-hover mt-1"
+    >
+      <thead class="bg-primary text-light">
+        <tr>
+          <th>Correo / Usuario</th>
+          <th>Rol</th>
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.email }}</td>
+          <td>{{ user.users_role.name }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.phone }}</td>
+          <td class="text-end">
+            <a
+              [ngStyle]="{ borderRadius: '5px' }"
+              (click)="onEdit(user)"
+              class="btn btn-primary btn-sm"
+            >
+              Editar
+            </a>
+            <a
+              [ngStyle]="{ borderRadius: '5px' }"
+               
+              class="btn btn-danger btn-sm mx-1"
+            >
+              Activo
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

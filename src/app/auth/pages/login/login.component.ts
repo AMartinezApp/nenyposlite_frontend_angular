@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { IUser } from '../../models/auth.models';
+import { UserI } from '../../models/auth.models';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void {
     this.authService.login(this.loginForm.value).subscribe((res) => {
-      let dataResponse: IUser = res.user;
+      let dataResponse: UserI = res.user;
       console.log(dataResponse);
        // saveUser
        localStorage.setItem('USER_ID',  `${dataResponse.id}` );

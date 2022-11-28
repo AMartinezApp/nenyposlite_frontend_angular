@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { CategoryI } from '../../models/category';
 import { ProductI } from '../../models/product';
 import { CategoryService } from '../../services/category.service';
 import { ProductService } from '../../services/product.service';
@@ -20,6 +21,8 @@ import { TaxService } from '../../services/tax.service';
 export class ProductComponent implements OnInit {
 
   headers = ['Código Barra', 'Nombre', 'Precio', 'Categoría', 'Almacén', 'Acciones'];
+  
+  categories: CategoryI[]=[]; 
 
   products: ProductI[]=[];
 
@@ -170,7 +173,7 @@ export class ProductComponent implements OnInit {
 
   getAllCategory() {
     this.categoryService.getAll().subscribe((res) => {
-      this.categoryService.categories = res.result;
+      this.categories = res;
     }).unsubscribe;
     // Unsubscribing from the observable for optimization of memory usage
   }

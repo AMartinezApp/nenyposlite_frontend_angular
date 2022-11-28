@@ -1,8 +1,9 @@
+ 
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
  
 import { Observable, BehaviorSubject, tap, throwError } from 'rxjs';
-import { ILogin, IUserResponse } from '../models/auth.models'; 
+import { LoginI, RoleI, UserI, UserResponseI } from '../models/auth.models'; 
 import { PathRest } from '../../commons/static/path-api'; 
 
 @Injectable({
@@ -16,20 +17,35 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) {} 
 
-  login(user: ILogin): Observable<IUserResponse> {
+  login(user: LoginI): Observable<UserResponseI> {
     return this.httpClient
-      .post<IUserResponse>(PathRest.POST_LOGIN, user)
+      .post<UserResponseI>(PathRest.POST_LOGIN, user)
       .pipe(
-        tap((res: IUserResponse) => {
+        tap((res: UserResponseI) => {
           if (res) {
-            // saveToken
+             
             this.saveToken(res.token);
             
           }
         }) 
       );
   }
+  getAll(): Observable<UserI[]> {
+    return this.httpClient.get<UserI[]>(PathRest.GET_LOGIN)
+  }
 
+  getAllRole(): Observable<RoleI[]> {
+    return this.httpClient.get<RoleI[]>(PathRest.USER_ROL)
+  }
+
+  onSave(user: UserI){
+    return this.httpClient.post<UserI>(PathRest.REGISTER_USER,user);
+  }
+
+  onUpdate(user: UserI){
+    return this.httpClient.put<UserI>(`${PathRest.GET_LOGIN}/${user.id}`,user);
+  }
+ 
   logout() {
     this.token = '';
     localStorage.removeItem('ACCESS_TOKEN');
@@ -42,7 +58,6 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    // return true if the user has token
     return !!localStorage.getItem('ACCESS_TOKEN');
   }
 
