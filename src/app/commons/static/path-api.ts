@@ -11,4 +11,5 @@ export class PathRest{
     static readonly PRODUCTS = environment.API_URL +'/products';
     static readonly SETTING = environment.API_URL +'/settings';
     static readonly CUSTOMERS = environment.API_URL +'/customers';
+    static readonly SUPPLIERS = environment.API_URL +'/suppliers';
 }

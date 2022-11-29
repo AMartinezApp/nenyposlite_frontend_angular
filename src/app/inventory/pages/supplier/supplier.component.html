@@ -1,1 +1,228 @@
-<p>supplier works!</p>
+<div class="row">
+    <div class="col-md-4">
+      <div [ngStyle]="{ borderRadius: '5px' }" class="card">
+        <div
+          class="card-header bg-primary text-light"
+          [ngStyle]="{ borderRadius: '5px' }"
+        >
+          PROVEEDOR
+        </div>
+        <div class="card-body">
+          <form [formGroup]="supplierForm" >
+
+            
+            <!-- name field  -->
+            <div class="form-floating mt-2">
+              <input
+                [ngStyle]="{ borderRadius: '5px' }"
+                required
+                name="name"
+                formControlName="name"
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Nombre"
+              />
+              <label for="floatingInput">Nombre</label>
+              <!-- validation-error -->
+              <div
+                *ngIf="supplierForm.get('name')?.touched && supplierForm.get('name')?.errors?.['required']"
+                class="alert alert-danger"
+              >
+                El campo es requerido
+              </div>
+              <div
+                *ngIf="supplierForm.get('name')?.touched && supplierForm.get('name')?.errors?.['minlength']"
+                class="alert alert-danger"
+              >
+                Se requiere 5 carácteres como mínimo
+              </div>
+              <div
+                *ngIf="supplierForm.get('name')?.touched && supplierForm.get('name')?.errors?.['maxlength']"
+                class="alert alert-danger"
+              >
+                Se ha excedido el límite de carácteres
+              </div>
+              <!-- validation-error -->
+            </div>
+  
+            <!-- email field  -->
+            <div class="form-floating mt-2">
+                <input
+                  [ngStyle]="{ borderRadius: '5px' }"
+                  required
+                  name="email"
+                  formControlName="email"
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  placeholder="Correo / Usuario"
+                />
+                <label for="floatingInput">Correo / Usuario</label>
+                <!-- validation-error -->
+                <div
+                  *ngIf="supplierForm.get('email')?.touched && supplierForm.get('email')?.errors?.['required']"
+                  class="alert alert-danger"
+                >
+                  El campo es requerido
+                </div>
+                <div
+                  *ngIf="supplierForm.get('email')?.touched && supplierForm.get('email')?.errors?.['email']"
+                  class="alert alert-danger"
+                >
+                  No es un correo válido
+                </div>
+                <div
+                  *ngIf="supplierForm.get('email')?.touched && supplierForm.get('email')?.errors?.['minlength']"
+                  class="alert alert-danger"
+                >
+                  Se requiere 5 carácteres como mínimo
+                </div>
+                <div
+                  *ngIf="supplierForm.get('email')?.touched && supplierForm.get('email')?.errors?.['maxlength']"
+                  class="alert alert-danger"
+                >
+                  Se ha excedido el límite de carácteres
+                </div>
+                <!-- validation-error -->
+            </div>
+     
+
+            <!-- phone field  -->
+            <div class="form-floating mt-2">
+              <input
+                [ngStyle]="{ borderRadius: '5px' }"
+                required
+                name="phone"
+                formControlName="phone"
+                type="text"
+                class="form-control"
+                id="phone"
+                placeholder="Teléfono"
+              />
+              <label for="floatingInput">Teléfono</label>
+              <!-- validation-error -->
+              <div
+                *ngIf="supplierForm.get('phone')?.touched && supplierForm.get('phone')?.errors?.['required']"
+                class="alert alert-danger"
+              >
+                El campo es requerido
+              </div>
+              <div
+                *ngIf="supplierForm.get('phone')?.touched && supplierForm.get('phone')?.errors?.['minlength']"
+                class="alert alert-danger"
+              >
+                Se requiere 5 carácteres como mínimo
+              </div>
+              <div
+                *ngIf="supplierForm.get('phone')?.touched && supplierForm.get('phone')?.errors?.['maxlength']"
+                class="alert alert-danger"
+              >
+                Se ha excedido el límite de carácteres
+              </div>
+              <!-- validation-error -->
+            </div>
+  
+            <input type="hidden" name="id" formControlName="id" />
+            <input type="hidden" name="status" formControlName="status" />
+  
+            <div class="row mt-1">
+              <div class="col-md-6">
+                <div class="d-grid gap-2 mt-2">
+                  <a
+                    (click)="onNewDoc()"
+                    [ngStyle]="{ borderRadius: '5px' }"
+                    class="btn btn-info"
+                  >
+                    N u e v o
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="d-grid gap-2 mt-2">
+                  <button
+                    [ngStyle]="{ borderRadius: '5px' }"
+                    (click)="onSave()"
+                    class="btn btn-primary"
+                    [disabled]="supplierForm.invalid"
+                  >
+                    G u a r d a r
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-8">
+      <div>
+        <input [ngStyle]="{borderRadius: '5px'}" #txtSearch class="form-control me-sm-2" type="text" placeholder="Buscar proveedores" (keyup)="onSearch(txtSearch.value)" />
+      </div>
+      <table
+        class="table table-bordered border-primary table-sm table-hover mt-1"
+      >
+        <thead class="bg-primary text-light">
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th class="text-end">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let supplier of suppliers | supplierFilter:  page: search">
+            <td>{{ supplier.name }}</td>
+            <td>{{ supplier.email }}</td>
+            <td>{{ supplier.phone }}</td>
+            <td class="text-end">
+              <a
+                [ngStyle]="{ borderRadius: '5px' }"
+                (click)="onEdit(supplier)"
+                class="btn btn-primary btn-sm"
+              >
+                Editar
+              </a>
+              <a
+                [ngStyle]="{ borderRadius: '5px' }"
+                 (click)="onUpdateStatus(supplier)"
+                class="btn btn-danger btn-sm mx-1"
+              >
+              Borrar      
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <ul class="pagination pagination-sm">
+          <button [ngStyle]="{borderRadius: '5px'}"
+            type="button"
+            class="btn btn-primary btn-sm"
+            (click)="prevPage()"
+          >
+            Anteriores
+          </button>
+  
+          <button [ngStyle]="{borderRadius: '5px'}"
+            type="button"
+            class="btn btn-primary btn-sm mx-1"
+            (click)="nextPage()"
+            [disabled]="(suppliers | supplierFilter: page: search).length === 0"
+          >
+            Siguientes
+          </button>
+  
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center mx-1"
+          >
+            Total de Proveedorer:
+            <span class="badge bg-primary rounded-pill mx-1">{{ totalDoc }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+

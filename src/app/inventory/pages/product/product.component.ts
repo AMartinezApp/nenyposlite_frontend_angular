@@ -21,16 +21,12 @@ import { TaxService } from '../../services/tax.service';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-
-  headers = ['Código Barra', 'Nombre', 'Precio', 'Categoría', 'Almacén', 'Acciones'];
-  
+  productForm!: FormGroup;
+  products: ProductI[]=[];
+    
   categories: CategoryI[]=[]; 
   stores!: StoreI[];
   taxs: TaxI[]=[]; 
-
-  products: ProductI[]=[];
-
-  productForm!: FormGroup;
 
   page: number = 0;
   totalDoc: number = 0;
@@ -76,10 +72,8 @@ export class ProductComponent implements OnInit {
     .subscribe(productsRes => {
       this.products = productsRes;
       this.totalDoc = this.products.length;
-      // this.documentLength=res.result.length;
-      // console.log(res);
     });
-    // Unsubscribing from the observable for optimization of memory usage
+  
 
     // fill categorySelect
     this.getAllCategory();
@@ -142,7 +136,6 @@ export class ProductComponent implements OnInit {
      
   }
 
-   
   onUdateStatus(product: ProductI): void {
     Swal.fire({
       title: 'Borrando el documento',

@@ -28,6 +28,7 @@ export class CategoryComponent implements OnInit {
     this.getAll();
   }
 
+   
   iniForm(): FormGroup {
     return this.fb.group({
       id: new FormControl(0),
