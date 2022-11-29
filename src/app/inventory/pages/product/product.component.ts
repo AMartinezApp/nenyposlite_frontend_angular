@@ -127,28 +127,7 @@ export class ProductComponent implements OnInit {
       });
     }
   }
-  
-  onDelete(id: number): void {
-    Swal.fire({
-      title: 'Borrando el documento',
-      text: 'No podrá recuperarlo si lo hace!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Si, borralo!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.productService.onDelete(id).subscribe((res) => {
-          this.getAll();
-          this.productForm.reset();
-        });
-        this.alertDone();
-      }
-    });
-  }
-
+   
   onEdit(product: ProductI) {
     // capture data for later editing
     
@@ -161,6 +140,33 @@ export class ProductComponent implements OnInit {
       this.productForm.patchValue({ idstore: product.products_store.id });
       this.productForm.patchValue({ idtax: product.products_tax.id });
      
+  }
+
+   
+  onUdateStatus(product: ProductI): void {
+    Swal.fire({
+      title: 'Borrando el documento',
+      text: 'No podrá recuperarlo si lo hace!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, borralo!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.onEdit(product);
+        this.productForm.patchValue({ status: 'D' });
+
+        this.productService
+          .onUpdate(this.productForm.value)
+          .subscribe((res) => {
+            this.getAll();
+            this.productForm.reset();
+            this.alertDone();
+          });
+      }
+    });
   }
 
   alertDone() {

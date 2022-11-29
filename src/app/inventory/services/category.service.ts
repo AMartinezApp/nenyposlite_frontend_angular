@@ -22,7 +22,5 @@ export class CategoryService {
       category
     );
   }
-  onDelete(requestId: number) {
-    return this.httpClient.delete(`${PathRest.CATEGORIES}/${requestId}`);
-  }
+   
 }

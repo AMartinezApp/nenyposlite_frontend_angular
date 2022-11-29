@@ -105,6 +105,7 @@ export class RegisterComponent implements OnInit {
       });
     }
   }
+
   onEdit(user: UserI){
     this.userRegisterForm.patchValue({id: user.id})
     this.userRegisterForm.patchValue({email: user.email})
@@ -116,7 +117,32 @@ export class RegisterComponent implements OnInit {
 
   }
    
+ // (click)="onUdateStatus(category)"
+   onUdateStatus(user: UserI): void {
+    Swal.fire({
+      title: 'Borrando el documento',
+      text: 'No podrá recuperarlo si lo hace!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, borralo!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.onEdit(user);
+        this.userRegisterForm.patchValue({ status: 'D' });
 
+        this.authService
+          .onUpdate(this.userRegisterForm.value)
+          .subscribe((res) => {
+            this.getAll();
+            this.userRegisterForm.reset();
+            this.alertDone();
+          });
+      }
+    });
+  }
   alertDone() {
     Swal.fire({
       position: 'top-end',

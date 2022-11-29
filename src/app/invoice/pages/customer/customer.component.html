@@ -167,7 +167,7 @@
             <th>Nombre</th>
             <th>Correo</th>
             <th>Teléfono</th>
-            <th>Acciones</th>
+            <th class="text-end">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -187,8 +187,10 @@
                 [ngStyle]="{ borderRadius: '5px' }"
                  
                 class="btn btn-danger btn-sm mx-1"
+               
               >
-                Activo
+              {{ customer.status! | statusDoc }}
+                  
               </a>
             </td>
           </tr>

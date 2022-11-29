@@ -42,6 +42,7 @@
             Se ha excedido el límite de carácteres
           </div>
           <input type="hidden" name="id" formControlName="id" />
+          <input type="hidden" name="status" formControlName="status" />
           <div class="row mt-1">
             <div class="col-md-6">
               <div class="d-grid gap-2 mt-2">
@@ -97,7 +98,7 @@
             </a>
             <a
               [ngStyle]="{ borderRadius: '5px' }"
-              (click)="onDelete(store.id)"
+              (click)="onUdateStatus(store)"
               class="btn btn-danger btn-sm mx-1"
             >
               Borrar

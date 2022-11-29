@@ -39,6 +39,7 @@ export class StoreComponent implements OnInit {
         Validators.minLength(5),
         Validators.maxLength(30),
       ]),
+      status: new FormControl('A'),
     });
   }
   onNewDoc() {
@@ -84,8 +85,16 @@ export class StoreComponent implements OnInit {
     }).unsubscribe;
     // Unsubscribing from the observable for optimization of memory usage
   }
+ 
 
-  onDelete(id: number): void {
+  onEdit(store: StoreI) {
+    // capture data for later editing
+    this.storeProductForm.patchValue({ name: store.name });
+    this.storeProductForm.patchValue({ id: store.id });
+  }
+
+   
+  onUdateStatus(store: StoreI): void {
     Swal.fire({
       title: 'Borrando el documento',
       text: 'No podrá recuperarlo si lo hace!',
@@ -97,19 +106,18 @@ export class StoreComponent implements OnInit {
       confirmButtonText: 'Si, borralo!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.storesService.onDelete(id).subscribe((res) => {
-          this.getAll();
-          this.storeProductForm.reset();
-        });
-        this.alertDone();
+        this.onEdit(store);
+        this.storeProductForm.patchValue({ status: 'D' });
+
+        this.storesService
+          .onUpdate(this.storeProductForm.value)
+          .subscribe((res) => {
+            this.getAll();
+            this.storeProductForm.reset();
+            this.alertDone();
+          });
       }
     });
-  }
-
-  onEdit(store: StoreI) {
-    // capture data for later editing
-    this.storeProductForm.patchValue({ name: store.name });
-    this.storeProductForm.patchValue({ id: store.id });
   }
 
   alertDone() {

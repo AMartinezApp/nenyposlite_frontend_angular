@@ -9,6 +9,7 @@ import { InvoicelistComponent } from './pages/invoicelist/invoicelist.component'
 import { CreditsentryComponent } from './pages/creditsentry/creditsentry.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerPipe } from './pipe/customer.pipe';
+import { StatusPipe } from '../commons/pipe/status.pipe';
 
 
 @NgModule({
@@ -18,7 +19,9 @@ import { CustomerPipe } from './pipe/customer.pipe';
     InvoiceComponent,
     InvoicelistComponent,
     CreditsentryComponent,
-    CustomerPipe
+    CustomerPipe,
+    StatusPipe
+
   ],
   imports: [
     CommonModule,

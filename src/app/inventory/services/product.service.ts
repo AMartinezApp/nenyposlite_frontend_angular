@@ -12,18 +12,18 @@ export class ProductService {
  
   constructor(private httpClient: HttpClient) {}
 
-  onSave(product: ProductI){
-    return this.httpClient.post<ProductI>(PathRest.PRODUCTS,product);
+  getAll(): Observable<ProductI[]> { 
+    return this.httpClient.get<ProductI[]>(PathRest.PRODUCTS);
+ }
+
+  onSave(product: ProductI): Observable<ProductI[]>{
+    return this.httpClient.post<ProductI[]>(PathRest.PRODUCTS,product);
   }
-  onUpdate(product: ProductI){
-    return this.httpClient.put<ProductI>(`${PathRest.PRODUCTS}/${product.id}`,product);
-  }
-  onDelete(requestId: number){
-    return this.httpClient.delete(`${PathRest.PRODUCTS}/${requestId}`);  
+  onUpdate(product: ProductI): Observable<ProductI[]>{
+    return this.httpClient.put<ProductI[]>(`${PathRest.PRODUCTS}/${product.id}`,product);
   }
   
-  getAll(): Observable<ProductI[]> { 
-     return this.httpClient.get<ProductI[]>(PathRest.PRODUCTS);
-  }
+  
+  
  
 }

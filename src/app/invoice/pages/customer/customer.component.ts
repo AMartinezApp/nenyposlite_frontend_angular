@@ -21,6 +21,7 @@ export class CustomerComponent implements OnInit {
   page: number = 0;
   totalDoc: number = 0;
   search: string = '';
+  status: string='Activo';
 
   constructor(
     private customerService: CustomerService,
@@ -128,6 +129,10 @@ export class CustomerComponent implements OnInit {
   onSearch(search: string){
     this.page = 0;
     this.search = search;
+  }
+
+  onUpdateStatus(customer: CustomerI){
+    this.customerForm.patchValue({ status: customer.status });
   }
 
 

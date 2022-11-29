@@ -34,9 +34,8 @@ export class TaxComponent implements OnInit {
         Validators.maxLength(30)
       ]),
       value: new FormControl(0,[
-        Validators.required,
-        //Validators.pattern("0-9")
-      ])
+        Validators.required]),
+        status: new FormControl('A'),
     });
   }
 
@@ -76,15 +75,24 @@ export class TaxComponent implements OnInit {
         });
     }
   }
-
+ 
   getAll() {
     this.taxService.getAll().subscribe((res) => {
       this.taxs = res;
     }).unsubscribe;
     // Unsubscribing from the observable for optimization of memory usage
   }
-  
-  onDelete(id: number): void {
+   
+
+  onEdit(tax: TaxI) {
+    // capture data for later editing
+    this.taxProductForm.patchValue({ id: tax.id });
+    this.taxProductForm.patchValue({ name: tax.name });
+    this.taxProductForm.patchValue({ value: tax.value });
+    
+  }
+
+   onUdateStatus(tax: TaxI): void {
     Swal.fire({
       title: 'Borrando el documento',
       text: 'No podrá recuperarlo si lo hace!',
@@ -96,21 +104,18 @@ export class TaxComponent implements OnInit {
       confirmButtonText: 'Si, borralo!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.taxService.onDelete(id).subscribe((res) => {
-          this.getAll();
-          this.taxProductForm.reset();
-        });
-        this.alertDone();
+        this.onEdit(tax);
+        this.taxProductForm.patchValue({ status: 'D' });
+
+        this.taxService
+          .onUpdate(this.taxProductForm.value)
+          .subscribe((res) => {
+            this.getAll();
+            this.taxProductForm.reset();
+            this.alertDone();
+          });
       }
     });
-  }
-
-  onEdit(tax: TaxI) {
-    // capture data for later editing
-    this.taxProductForm.patchValue({ id: tax.id });
-    this.taxProductForm.patchValue({ name: tax.name });
-    this.taxProductForm.patchValue({ value: tax.value });
-    
   }
 
   alertDone() {

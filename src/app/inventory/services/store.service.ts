@@ -24,7 +24,5 @@ export class StoreService {
     );
   }
 
-  onDelete(requestId: number) {
-    return this.httpClient.delete(`${PathRest.STORES}/${requestId}`);
-  }
+  
 }

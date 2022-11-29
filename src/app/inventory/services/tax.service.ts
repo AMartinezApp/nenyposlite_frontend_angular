@@ -12,17 +12,14 @@ import { TaxI } from '../models/tax';
 export class TaxService {
   constructor(private httpClient: HttpClient) {}
 
+  getAll(): Observable<TaxI[]> {
+    return this.httpClient.get<TaxI[]>(PathRest.TAXES);
+  }
+
   onSave(tax: TaxI): Observable<TaxI[]> {
     return this.httpClient.post<TaxI[]>(PathRest.TAXES, tax);
   }
   onUpdate(tax: TaxI): Observable<TaxI[]> {
     return this.httpClient.put<TaxI[]>(`${PathRest.TAXES}/${tax.id}`, tax);
-  }
-  onDelete(requestId: number) {
-    return this.httpClient.delete(`${PathRest.TAXES}/${requestId}`);
-  }
-
-  getAll(): Observable<TaxI[]> {
-    return this.httpClient.get<TaxI[]>(PathRest.TAXES);
   }
 }
