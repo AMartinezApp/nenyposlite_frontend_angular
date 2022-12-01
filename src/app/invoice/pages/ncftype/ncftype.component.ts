@@ -92,6 +92,7 @@ export class NcftypeComponent implements OnInit {
   onSave() {
     this.ncftypeForm.patchValue({ iduser: localStorage.getItem('USER_ID') });
     this.ncftypeForm.patchValue({ status: 'A' });
+    console.log(this.ncftypeForm.value);
     if (this.ncftypeForm.value.id > 0) {
       Swal.fire({
         title: 'Modificar?',
@@ -183,4 +184,5 @@ export class NcftypeComponent implements OnInit {
     this.ncftypeForm.patchValue({ final_num: data[0].inicial_num });
     this.ncftypeForm.patchValue({ current_num: data[0].inicial_num });
   }
+  
 }

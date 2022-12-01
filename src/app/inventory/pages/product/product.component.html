@@ -106,9 +106,9 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
+  <div class="modal-dialog modal-lg shadow p-1 mb-7 bg-body rounded">
+    <div class="modal-content ">
+      <div class="modal-header bg-primary text-light">
         <h1 class="modal-title" id="exampleModalLabel">Maestro de productos</h1>
         <button
           type="button"
@@ -117,7 +117,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body ">
         <div class="col-md-12">
           <div class="card">
             <div
@@ -126,7 +126,7 @@
             >
               Detalle del producto
             </div>
-            <div [ngStyle]="{ borderRadius: '5px' }" class="card-body">
+            <div [ngStyle]="{ borderRadius: '5px' }" class="card-body ">
               <form [formGroup]="productForm">
                 <input type="hidden" name="id" formControlName="id" />
 

@@ -9,6 +9,7 @@ export interface NcftypeI {
   expiration: string;
   status?: string;
   tax: number;
+  iduser: number;
 }
 
  export interface NcfDataI {
