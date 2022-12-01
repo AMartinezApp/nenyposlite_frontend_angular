@@ -12,7 +12,7 @@ import { SupplierComponent } from './pages/supplier/supplier.component';
 
 import { SupplierPipe } from './pipe/supplier.pipe';
 import { ProductPipe } from './pipe/product.pipe';
-import { StatusPipe } from '../commons/pipe/status.pipe';
+ 
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { StatusPipe } from '../commons/pipe/status.pipe';
     ProductComponent,
     ProductPipe,
     SupplierPipe,
-    StatusPipe,
+
     SupplierComponent
   ],
   imports: [CommonModule, InventoryRoutingModule, ReactiveFormsModule],

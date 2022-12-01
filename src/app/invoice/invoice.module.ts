@@ -8,8 +8,10 @@ import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { InvoicelistComponent } from './pages/invoicelist/invoicelist.component';
 import { CreditsentryComponent } from './pages/creditsentry/creditsentry.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { CustomerPipe } from './pipe/customer.pipe';
-import { StatusPipe } from '../commons/pipe/status.pipe';
+ 
+
 
 
 @NgModule({
@@ -19,8 +21,7 @@ import { StatusPipe } from '../commons/pipe/status.pipe';
     InvoiceComponent,
     InvoicelistComponent,
     CreditsentryComponent,
-    CustomerPipe,
-    StatusPipe
+    CustomerPipe 
 
   ],
   imports: [

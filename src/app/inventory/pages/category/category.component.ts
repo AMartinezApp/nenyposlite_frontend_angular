@@ -89,7 +89,6 @@ export class CategoryComponent implements OnInit {
     this.categoryProductForm.patchValue({ id: category.id });
   }
   
-  // (click)="onUdateStatus(category)"
   onUdateStatus(category: CategoryI): void {
     Swal.fire({
       title: 'Borrando el documento',
