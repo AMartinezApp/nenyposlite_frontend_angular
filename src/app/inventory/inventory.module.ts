@@ -12,6 +12,8 @@ import { SupplierComponent } from './pages/supplier/supplier.component';
 
 import { SupplierPipe } from './pipe/supplier.pipe';
 import { ProductPipe } from './pipe/product.pipe';
+
+
  
 
 @NgModule({
@@ -23,6 +25,7 @@ import { ProductPipe } from './pipe/product.pipe';
     ProductComponent,
     ProductPipe,
     SupplierPipe,
+   
 
     SupplierComponent
   ],

@@ -10,8 +10,12 @@ export class PathRest{
     static readonly TAXES = environment.API_URL +'/productstaxes';
     static readonly PRODUCTS = environment.API_URL +'/products';
     static readonly SETTING = environment.API_URL +'/settings';
-    static readonly CUSTOMERS = environment.API_URL +'/customers';
     static readonly SUPPLIERS = environment.API_URL +'/suppliers';
+    
+    // invoices Module
+    static readonly INVOICES = environment.API_URL +'/invoices';
+    static readonly CUSTOMERS = environment.API_URL +'/customers';
     static readonly NCFTYPES = environment.API_URL +'/ncftypes';
+
     
 }

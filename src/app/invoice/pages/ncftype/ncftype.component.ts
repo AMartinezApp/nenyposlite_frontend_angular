@@ -41,41 +41,41 @@ export class NcftypeComponent implements OnInit {
 
   iniForm(): FormGroup {
     return this.fb.group({
-      id: new FormControl(0),
-      name: new FormControl('', [
+      id: [0],
+      name: ['', [
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(50),
-      ]),
-      typedoc: new FormControl('', [
+      ]],
+      typedoc: ['', [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50),
-      ]),
-      prefix: new FormControl('', [
+      ]],
+      prefix: ['', [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(2),
-      ]),
-      inicial_num: new FormControl(0, [
+      ]],
+      inicial_num: [0, [
         Validators.required,
         Validators.minLength(9),
         Validators.maxLength(9),
-      ]),
-      final_num: new FormControl(0, [
+      ]],
+      final_num: [0, [
         Validators.required,
         Validators.minLength(9),
         Validators.maxLength(9),
-      ]),
-      current_num: new FormControl(0, [
+      ]],
+      current_num: [0, [
         Validators.required,
         Validators.minLength(9),
         Validators.maxLength(9),
-      ]),
-      expiration: new FormControl('', [Validators.required]),
-      tax: new FormControl(0),
-      status: new FormControl('A'),
-      iduser: new FormControl(0),
+      ]],
+      expiration: ['', [Validators.required]],
+      tax: [0],
+      status: ['A'],
+      iduser: [0],
     });
   }
 

@@ -10,6 +10,8 @@ import { CreditsentryComponent } from './pages/creditsentry/creditsentry.compone
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CustomerPipe } from './pipe/customer.pipe';
+import { InvoicePipe } from './pipe/invoice.pipe';
+import { InvconditionPipe } from './pipe/invcondition.pipe';
  
 
 
@@ -21,7 +23,9 @@ import { CustomerPipe } from './pipe/customer.pipe';
     InvoiceComponent,
     InvoicelistComponent,
     CreditsentryComponent,
-    CustomerPipe 
+    CustomerPipe,
+    InvoicePipe,
+    InvconditionPipe 
 
   ],
   imports: [

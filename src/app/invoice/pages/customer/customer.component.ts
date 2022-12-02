@@ -35,24 +35,24 @@ export class CustomerComponent implements OnInit {
 
   iniForm(): FormGroup {
     return this.fb.group({
-      id: new FormControl(0),
-      name: new FormControl('', [
+      id: [0],
+      name: ['', [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(50),
-      ]),
-      phone: new FormControl('', [
+      ]],
+      phone: ['', [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(50),
-      ]),
-      email: new FormControl('', [
+      ]],
+      email: ['', [
         Validators.email,
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(50),
-      ]),
-      iduser: new FormControl(0),
+      ]],
+      iduser: [0],
     });
   }
 

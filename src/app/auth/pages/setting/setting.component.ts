@@ -29,44 +29,20 @@ export class SettingComponent implements OnInit {
 
   iniForm(): FormGroup {
     return this.fb.group({
-      id: new FormControl(0),
-      name: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(50),
-      ]),
-      phone: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(50),
-      ]),
-      email: new FormControl('@', [Validators.required, Validators.email]),
-      address: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(50),
-      ]),
-      city: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(50),
-      ]),
-      identity: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(50),
-      ]),
-      logo: new FormControl('logoamartinez.jpg', [
-        Validators.required,
-        Validators.maxLength(50),
-      ]),
-      note_sales: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(500),
-      ]),
-      note_receipts: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(500),
-      ]),
-      footer: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(500),
-      ]),
+      id: [0],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
+      phone: ['', [Validators.required, Validators.maxLength(50)]],
+      email: ['@', [Validators.required, Validators.email]],
+      address: ['', [Validators.required, Validators.maxLength(50)]],
+      city: ['', [Validators.required, Validators.maxLength(50)]],
+      identity: ['', [Validators.required, Validators.maxLength(50)]],
+      logo: [
+        'logoamartinez.jpg',
+        [Validators.required, Validators.maxLength(50)],
+      ],
+      note_sales: ['', [Validators.required, Validators.maxLength(500)]],
+      note_receipts: ['', [Validators.required, Validators.maxLength(500)]],
+      footer: ['', [Validators.required, Validators.maxLength(500)]],
     });
   }
 

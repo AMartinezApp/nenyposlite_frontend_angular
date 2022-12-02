@@ -22,16 +22,16 @@ import { TaxService } from '../../services/tax.service';
 })
 export class ProductComponent implements OnInit {
   productForm!: FormGroup;
-  products: ProductI[]=[];
-    
-  categories: CategoryI[]=[]; 
+  products: ProductI[] = [];
+
+  categories: CategoryI[] = [];
   stores!: StoreI[];
-  taxs: TaxI[]=[]; 
+  taxs: TaxI[] = [];
 
   page: number = 0;
   totalDoc: number = 0;
   search: string = '';
- 
+
   constructor(
     private readonly fb: FormBuilder,
     public productService: ProductService,
@@ -47,33 +47,34 @@ export class ProductComponent implements OnInit {
 
   iniForm(): FormGroup {
     return this.fb.group({
-      id: new FormControl(0),
-      barcode: new FormControl('', Validators.required),
-      name: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(30),
-      ]),
-      cost: new FormControl(0, Validators.required),
-      price: new FormControl(0, Validators.required),
-      idcategory: new FormControl(0, Validators.required),
-      idstore: new FormControl(0, Validators.required),
-      idtax: new FormControl(0, Validators.required),
-      iduser: new FormControl(0),
+      id: [0],
+      barcode: ['', Validators.required],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(30),
+        ],
+      ],
+      cost: [0, Validators.required],
+      price: [0, Validators.required],
+      idcategory: [0, Validators.required],
+      idstore: [0, Validators.required],
+      idtax: [0, Validators.required],
+      iduser: [0],
     });
   }
 
-  newFormDoc(){
+  newFormDoc() {
     this.productForm.reset();
   }
 
   getAll() {
-    this.productService.getAll()
-    .subscribe(productsRes => {
+    this.productService.getAll().subscribe((productsRes) => {
       this.products = productsRes;
       this.totalDoc = this.products.length;
     });
-  
 
     // fill categorySelect
     this.getAllCategory();
@@ -121,19 +122,18 @@ export class ProductComponent implements OnInit {
       });
     }
   }
-   
+
   onEdit(product: ProductI) {
     // capture data for later editing
-    
-      this.productForm.patchValue({ id: product.id });
-      this.productForm.patchValue({ barcode: product.barcode });
-      this.productForm.patchValue({ name: product.name });
-      this.productForm.patchValue({ cost: product.cost });
-      this.productForm.patchValue({ price: product.price });
-      this.productForm.patchValue({ idcategory: product.products_category.id });
-      this.productForm.patchValue({ idstore: product.products_store.id });
-      this.productForm.patchValue({ idtax: product.products_tax.id });
-     
+
+    this.productForm.patchValue({ id: product.id });
+    this.productForm.patchValue({ barcode: product.barcode });
+    this.productForm.patchValue({ name: product.name });
+    this.productForm.patchValue({ cost: product.cost });
+    this.productForm.patchValue({ price: product.price });
+    this.productForm.patchValue({ idcategory: product.products_category.id });
+    this.productForm.patchValue({ idstore: product.products_store.id });
+    this.productForm.patchValue({ idtax: product.products_tax.id });
   }
 
   onUdateStatus(product: ProductI): void {
@@ -194,17 +194,15 @@ export class ProductComponent implements OnInit {
   }
 
   nextPage() {
-    this.page +=10;
+    this.page += 10;
   }
 
   prevPage() {
-    if (this.page > 0)
-        this.page -=10;
+    if (this.page > 0) this.page -= 10;
   }
 
-  onSearch(search: string){
+  onSearch(search: string) {
     this.page = 0;
     this.search = search;
   }
-
 }

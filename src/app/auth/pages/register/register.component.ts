@@ -8,7 +8,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
- 
+
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
 
@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
   users: UserI[] = [];
   roles: RoleI[] = [];
 
-
   constructor(
     private authService: AuthService,
     private readonly fb: FormBuilder
@@ -34,46 +33,84 @@ export class RegisterComponent implements OnInit {
   }
 
   iniForm() {
-    return this.fb.group({
-      id: new FormControl(0),
-      email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(100), Validators.minLength(10)]),
-      name: new FormControl('', [Validators.required, Validators.maxLength(100), Validators.minLength(10)]),
-      password: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.minLength(4)]),
-      confirm: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.minLength(4)]),
-      phone: new FormControl('', [Validators.required, Validators.maxLength(100), Validators.minLength(10)]),
-      idrole: new FormControl(0, [Validators.required]),
-    },{ validator: this.matchPassword });
-  }
-  
-  matchPassword(control: AbstractControl): ValidationErrors | null {
-  
-    const password = control.get("password")?.value;
-    const confirm = control.get("confirm")?.value;
- 
-    if (password != confirm) { 
-      return { 'noMatch': true } 
-    }else{
-      return null
-    } 
+    return this.fb.group(
+      {
+        id: [0],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.email,
+            Validators.maxLength(100),
+            Validators.minLength(10),
+          ],
+        ],
+        name: [
+          '',
+          [
+            Validators.required,
+            Validators.maxLength(100),
+            Validators.minLength(10),
+          ],
+        ],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.maxLength(20),
+            Validators.minLength(4),
+          ],
+        ],
+        confirm: [
+          '',
+          [
+            Validators.required,
+            Validators.maxLength(20),
+            Validators.minLength(4),
+          ],
+        ],
+        phone: [
+          '',
+          [
+            Validators.required,
+            Validators.maxLength(100),
+            Validators.minLength(10),
+          ],
+        ],
+        idrole: [0, [Validators.required]],
+      },
+      { validator: this.matchPassword }
+    );
   }
 
-  getAll(){
+  matchPassword(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password')?.value;
+    const confirm = control.get('confirm')?.value;
+
+    if (password != confirm) {
+      return { noMatch: true };
+    } else {
+      return null;
+    }
+  }
+
+  getAll() {
     this.authService.getAll().subscribe((res) => {
-     this.users = res;
+      this.users = res;
     });
     this.getAllRole();
   }
 
-  getAllRole(){
+  getAllRole() {
     this.authService.getAllRole().subscribe((res) => {
-     this.roles = res;
+      this.roles = res;
     });
   }
 
-  onNewDoc(){
+  onNewDoc() {
     this.userRegisterForm.reset();
   }
-  onSave(){
+  onSave() {
     if (this.userRegisterForm.value.id > 0) {
       // modifying data
       Swal.fire({
@@ -91,7 +128,7 @@ export class RegisterComponent implements OnInit {
             .onUpdate(this.userRegisterForm.value)
             .subscribe((res) => {
               this.getAll();
-              this.userRegisterForm.reset(); 
+              this.userRegisterForm.reset();
               this.alertDone();
             });
         }
@@ -106,19 +143,18 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onEdit(user: UserI){
-    this.userRegisterForm.patchValue({id: user.id})
-    this.userRegisterForm.patchValue({email: user.email})
-    this.userRegisterForm.patchValue({name: user.name})
-    this.userRegisterForm.patchValue({phone: user.phone})
-    this.userRegisterForm.patchValue({idrole: user.idrole})
-    this.userRegisterForm.patchValue({password: user.password})
-    this.userRegisterForm.patchValue({confirm: user.password})
-
+  onEdit(user: UserI) {
+    this.userRegisterForm.patchValue({ id: user.id });
+    this.userRegisterForm.patchValue({ email: user.email });
+    this.userRegisterForm.patchValue({ name: user.name });
+    this.userRegisterForm.patchValue({ phone: user.phone });
+    this.userRegisterForm.patchValue({ idrole: user.idrole });
+    this.userRegisterForm.patchValue({ password: user.password });
+    this.userRegisterForm.patchValue({ confirm: user.password });
   }
-   
- // (click)="onUdateStatus(category)"
-   onUdateStatus(user: UserI): void {
+
+  // (click)="onUdateStatus(category)"
+  onUdateStatus(user: UserI): void {
     Swal.fire({
       title: 'Borrando el documento',
       text: 'No podrá recuperarlo si lo hace!',
@@ -152,5 +188,4 @@ export class RegisterComponent implements OnInit {
       timer: 1200,
     });
   }
-
 }

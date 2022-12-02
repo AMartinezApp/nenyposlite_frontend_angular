@@ -33,13 +33,13 @@ export class StoreComponent implements OnInit {
 
   iniForm(): FormGroup {
     return this.fb.group({
-      id: new FormControl(0),
-      name: new FormControl('', [
+      id: [0],
+      name: ['', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(30),
-      ]),
-      status: new FormControl('A'),
+      ]],
+      status: ['A'],
     });
   }
   onNewDoc() {

@@ -1,1 +1,104 @@
-<p>invoicelist works!</p>
+<div class="row">
+    <div class="col-md-2">
+      <button
+        [ngStyle]="{ borderRadius: '5px' }"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#producDetails"
+        class="btn btn-primary"
+      >
+      F A C T U R A R
+      </button>
+    </div>
+    <div class="col-md-10">
+      <input
+        [ngStyle]="{ borderRadius: '5px' }"
+        #txtSearch
+        class="form-control me-sm-2"
+        type="text"
+        placeholder="Buscar factura"
+        (keyup)="onSearch(txtSearch.value)"
+      />
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <table
+        class="table table-bordered border-primary table-sm table-hover mt-1"
+      >
+        <thead class="bg-primary text-light">
+          <tr>
+            <th>Fact#</th>
+            <th>Fecha</th>
+            <th>Condición</th>
+            <th>Cliente</th>
+           <th class="text-end">SubTotal</th>
+           <th class="text-end">Descuento</th>
+           <th class="text-end">ITBIS</th>
+           <th class="text-end">Total</th>
+            <th class="text-end">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let listInvoice of listInvoices | invoiceFilter: page:search ">
+            <td>{{ listInvoice.id }}</td>
+            <td>{{ listInvoice.createdAt | date }}</td>
+            <td>{{ listInvoice.condition | invcondition }}</td>
+            <td>{{ listInvoice.customer.name }}</td>
+            <td class="text-end">{{ listInvoice.total_price | currency }}</td>
+            <td class="text-end">{{ listInvoice.total_discount | currency }}</td>
+            <td class="text-end">{{ listInvoice.total_tax | currency }}</td>
+            <td class="text-end">{{ (listInvoice.total_price - listInvoice.total_discount)+ listInvoice.total_tax| currency }}</td>
+            <td class="text-end">
+              <a
+                [ngStyle]="{ borderRadius: '5px' }"
+                data-bs-toggle="modal"
+                data-bs-target="#producDetails"
+                 
+                class="btn btn-primary btn-sm"
+              >
+                Editar
+              </a>
+              <a
+                [ngStyle]="{ borderRadius: '5px' }"
+                 
+                class="btn btn-danger btn-sm mx-1"
+              >
+                borrar
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <ul class="pagination pagination-sm">
+          <button
+            [ngStyle]="{ borderRadius: '5px' }"
+            type="button"
+            class="btn btn-primary btn-sm"
+            (click)="prevPage()"
+          >
+            Anteriores
+          </button>
+  
+          <button
+            [ngStyle]="{ borderRadius: '5px' }"
+            type="button"
+            class="btn btn-primary btn-sm mx-1"
+            (click)="nextPage()"
+            [disabled]="(listInvoices | invoiceFilter: page:search).length === 0"
+          >
+            Siguientes
+          </button>
+  
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center mx-1"
+          >
+            Total de Productos:
+            <span class="badge bg-primary rounded-pill mx-1">{{ totalDoc }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>

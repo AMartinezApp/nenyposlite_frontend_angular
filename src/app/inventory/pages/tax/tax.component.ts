@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { TaxI } from '../../models/tax';
 import { TaxService } from '../../services/tax.service';
@@ -7,13 +12,11 @@ import { TaxService } from '../../services/tax.service';
 @Component({
   selector: 'app-tax',
   templateUrl: './tax.component.html',
-  styleUrls: ['./tax.component.scss']
+  styleUrls: ['./tax.component.scss'],
 })
 export class TaxComponent implements OnInit {
-
-       taxProductForm!: FormGroup;
-       taxs: TaxI[]=[]; 
-
+  taxProductForm!: FormGroup;
+  taxs: TaxI[] = [];
 
   constructor(
     private readonly fb: FormBuilder,
@@ -27,19 +30,21 @@ export class TaxComponent implements OnInit {
 
   iniForm(): FormGroup {
     return this.fb.group({
-      id: new FormControl(0),
-      name: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(30)
-      ]),
-      value: new FormControl(0,[
-        Validators.required]),
-        status: new FormControl('A'),
+      id: [0],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(30),
+        ],
+      ],
+      value: [0, [Validators.required]],
+      status: ['A'],
     });
   }
 
-  onNewDoc(){
+  onNewDoc() {
     this.taxProductForm.reset();
   }
 
@@ -62,37 +67,33 @@ export class TaxComponent implements OnInit {
               this.getAll();
               this.taxProductForm.reset();
             });
-            this.alertDone();
+          this.alertDone();
         }
       });
     } else {
-      this.taxService
-        .onSave(this.taxProductForm.value)
-        .subscribe((res) => {
-          this.getAll();
-          this.taxProductForm.reset();
-          this.alertDone();
-        });
+      this.taxService.onSave(this.taxProductForm.value).subscribe((res) => {
+        this.getAll();
+        this.taxProductForm.reset();
+        this.alertDone();
+      });
     }
   }
- 
+
   getAll() {
     this.taxService.getAll().subscribe((res) => {
       this.taxs = res;
     }).unsubscribe;
     // Unsubscribing from the observable for optimization of memory usage
   }
-   
 
   onEdit(tax: TaxI) {
     // capture data for later editing
     this.taxProductForm.patchValue({ id: tax.id });
     this.taxProductForm.patchValue({ name: tax.name });
     this.taxProductForm.patchValue({ value: tax.value });
-    
   }
 
-   onUdateStatus(tax: TaxI): void {
+  onUdateStatus(tax: TaxI): void {
     Swal.fire({
       title: 'Borrando el documento',
       text: 'No podrá recuperarlo si lo hace!',
@@ -107,13 +108,11 @@ export class TaxComponent implements OnInit {
         this.onEdit(tax);
         this.taxProductForm.patchValue({ status: 'D' });
 
-        this.taxService
-          .onUpdate(this.taxProductForm.value)
-          .subscribe((res) => {
-            this.getAll();
-            this.taxProductForm.reset();
-            this.alertDone();
-          });
+        this.taxService.onUpdate(this.taxProductForm.value).subscribe((res) => {
+          this.getAll();
+          this.taxProductForm.reset();
+          this.alertDone();
+        });
       }
     });
   }
@@ -127,6 +126,4 @@ export class TaxComponent implements OnInit {
       timer: 1200,
     });
   }
- 
-
 }
