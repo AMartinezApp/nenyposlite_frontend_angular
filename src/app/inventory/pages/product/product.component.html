@@ -1,7 +1,6 @@
-<div class="row">
+<div class="row mt-1">
   <div class="col-md-2">
     <button
-      [ngStyle]="{ borderRadius: '5px' }"
       type="button"
       data-bs-toggle="modal"
       data-bs-target="#producDetails"
@@ -13,7 +12,6 @@
   </div>
   <div class="col-md-10">
     <input
-      [ngStyle]="{ borderRadius: '5px' }"
       #txtSearch
       class="form-control me-sm-2"
       type="text"
@@ -25,21 +23,23 @@
 
 <div class="row">
   <div class="col-md-12">
-    <table
-      class="table table-bordered border-primary table-sm table-hover mt-1"
-    >
-      <thead class="bg-primary text-light">
+    <table class="zui-table zui-table-rounded mt-1">
+      <thead class="bg-info text-light">
         <tr>
           <th>Código Barra</th>
           <th class="col-sm-5">Nombre</th>
           <th class="text-end">Precio</th>
           <th>Categoría</th>
           <th>Almacén</th>
-          <th class="text-end">Acciones</th>
+          <th class="col-sm-2 text-end">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products | productFilter: page:search">
+        <tr
+          *ngFor="
+            let product of products | productFilter : page : search : docByPage
+          "
+        >
           <td>{{ product.barcode | uppercase }}</td>
           <td>{{ product.name }}</td>
           <td class="text-end">{{ product.price | currency }}</td>
@@ -47,7 +47,6 @@
           <td>{{ product.products_store.name }}</td>
           <td class="text-end">
             <a
-              [ngStyle]="{ borderRadius: '5px' }"
               data-bs-toggle="modal"
               data-bs-target="#producDetails"
               (click)="onEdit(product)"
@@ -56,7 +55,6 @@
               Editar
             </a>
             <a
-              [ngStyle]="{ borderRadius: '5px' }"
               (click)="onUdateStatus(product)"
               class="btn btn-danger btn-sm mx-1"
             >
@@ -66,23 +64,24 @@
         </tr>
       </tbody>
     </table>
+
     <div>
-      <ul class="pagination pagination-sm">
+      <ul class="pagination pagination-sm mt-1">
         <button
-          [ngStyle]="{ borderRadius: '5px' }"
           type="button"
-          class="btn btn-primary btn-sm"
+          class="btn btn-secondary btn-sm"
           (click)="prevPage()"
         >
           Anteriores
         </button>
 
         <button
-          [ngStyle]="{ borderRadius: '5px' }"
           type="button"
-          class="btn btn-primary btn-sm mx-1"
+          class="btn btn-secondary btn-sm mx-1"
           (click)="nextPage()"
-          [disabled]="(products | productFilter: page:search).length === 0"
+          [disabled]="
+            (products | productFilter : page : search : docByPage).length === 0
+          "
         >
           Siguientes
         </button>
@@ -106,27 +105,15 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-lg shadow p-1 mb-7 bg-body rounded">
-    <div class="modal-content ">
-      <div class="modal-header bg-primary text-light">
-        <h1 class="modal-title" id="exampleModalLabel">Maestro de productos</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body ">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="border-radius: 5px">
+      <div class="modal-body">
         <div class="col-md-12">
           <div class="card">
-            <div
-              [ngStyle]="{ borderRadius: '5px' }"
-              class="card-header bg-primary text-light"
-            >
+            <div class="card-header bg-primary text-light">
               Detalle del producto
             </div>
-            <div [ngStyle]="{ borderRadius: '5px' }" class="card-body ">
+            <div class="card-body">
               <form [formGroup]="productForm">
                 <input type="hidden" name="id" formControlName="id" />
 
@@ -141,7 +128,6 @@
 
                       <div class="col-md-9">
                         <input
-                          [ngStyle]="{ borderRadius: '5px' }"
                           class="form-control form-control-sm"
                           type="text"
                           name="barcode"
@@ -159,7 +145,6 @@
 
                       <div class="col-md-9">
                         <input
-                          [ngStyle]="{ borderRadius: '5px' }"
                           class="form-control form-control-sm"
                           type="text"
                           name="name"
@@ -177,7 +162,6 @@
 
                       <div class="col-md-9">
                         <input
-                          [ngStyle]="{ borderRadius: '5px' }"
                           class="form-control form-control-sm"
                           type="number"
                           name="cost"
@@ -195,7 +179,6 @@
 
                       <div class="col-md-9">
                         <input
-                          [ngStyle]="{ borderRadius: '5px' }"
                           class="form-control form-control-sm"
                           type="number"
                           name="cost"
@@ -215,14 +198,13 @@
                       </div>
                       <div class="col-md-9">
                         <select
-                          [ngStyle]="{ borderRadius: '5px' }"
                           class="form-select"
                           name="idcategory"
                           formControlName="idcategory"
                         >
                           <option
-                            [value]="cat.id"
                             *ngFor="let cat of categories"
+                            [value]="cat.id"
                           >
                             {{ cat.name }}
                           </option>
@@ -238,14 +220,13 @@
 
                       <div class="col-md-9">
                         <select
-                          [ngStyle]="{ borderRadius: '5px' }"
                           class="form-select"
                           name="idstore"
                           formControlName="idstore"
                         >
                           <option
-                            [value]="store.id"
                             *ngFor="let store of stores"
+                            [value]="store.id"
                           >
                             {{ store.name }}
                           </option>
@@ -261,12 +242,10 @@
 
                       <div class="col-md-9">
                         <select
-                          [ngStyle]="{ borderRadius: '5px' }"
                           class="form-select"
                           name="idtax"
                           formControlName="idtax"
                         >
-                          <option selected></option>
                           <option *ngFor="let tax of taxs" [value]="tax.id">
                             {{ tax.name }}
                           </option>
@@ -282,7 +261,6 @@
       </div>
       <div class="modal-footer">
         <button
-          [ngStyle]="{ borderRadius: '5px' }"
           type="button"
           id="cancel"
           class="btn btn-secondary"
@@ -292,7 +270,6 @@
         </button>
         <ng-container *ngIf="productForm.value.id; else save">
           <button
-            [ngStyle]="{ borderRadius: '5px' }"
             type="button"
             class="btn btn-primary"
             (click)="onSave()"
@@ -304,7 +281,6 @@
 
         <ng-template #save>
           <button
-            [ngStyle]="{ borderRadius: '5px' }"
             type="button"
             class="btn btn-primary"
             (click)="onSave()"

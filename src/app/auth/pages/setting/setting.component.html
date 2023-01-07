@@ -1,10 +1,5 @@
-<div [ngStyle]="{ borderRadius: '5px' }" class="card shadow p-1 mb-7 bg-body rounded">
-  <div
-    class="card-header bg-primary text-light"
-    [ngStyle]="{ borderRadius: '5px' }"
-  >
-    CONFIGURACIÓN
-  </div>
+<div class="card">
+  <div class="card-header bg-secondary text-light">CONFIGURACIÓN</div>
   <div class="card-body">
     <form [formGroup]="settingForm">
       <div class="row">
@@ -13,7 +8,6 @@
           <!-- name field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="name"
               formControlName="name"
@@ -46,7 +40,6 @@
           <!-- rnc field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="identity"
               formControlName="identity"
@@ -79,7 +72,6 @@
           <!-- phone field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="phone"
               formControlName="phone"
@@ -112,7 +104,6 @@
           <!-- email field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="email"
               formControlName="email"
@@ -145,7 +136,6 @@
           <!-- address field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="address"
               formControlName="address"
@@ -178,7 +168,6 @@
           <!-- city field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="city"
               formControlName="city"
@@ -214,7 +203,6 @@
           <!-- note_sale field  -->
           <div class="form-floating mt-2">
             <textarea
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="note_sales"
               formControlName="note_sales"
@@ -249,7 +237,6 @@
           <!-- note_receipts field  -->
           <div class="form-floating mt-2">
             <textarea
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="note_receipts"
               formControlName="note_receipts"
@@ -284,7 +271,6 @@
           <!-- footer field  -->
           <div class="form-floating mt-2">
             <textarea
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="footer"
               formControlName="footer"
@@ -327,9 +313,8 @@
         <div class="col-md-6">
           <div class="d-grid gap-2 mt-2">
             <button
-              [ngStyle]="{ borderRadius: '5px' }"
               type="submit"
-              class="btn btn-primary"
+              class="btn btn-secondary"
               (click)="onSave()"
               [disabled]="settingForm.invalid"
             >

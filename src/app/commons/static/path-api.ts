@@ -14,6 +14,7 @@ export class PathRest{
     
     // invoices Module
     static readonly INVOICES = environment.API_URL +'/invoices';
+    static readonly INVOICESDETAILS = environment.API_URL +'/invoicesdetails';
     static readonly CUSTOMERS = environment.API_URL +'/customers';
     static readonly NCFTYPES = environment.API_URL +'/ncftypes';
 

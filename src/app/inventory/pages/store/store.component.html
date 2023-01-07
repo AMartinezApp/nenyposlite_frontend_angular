@@ -1,18 +1,12 @@
-<div  class="row">
+<div class="row">
   <div class="col-md-4">
-    <div [ngStyle]="{ borderRadius: '5px' }" class="card shadow p-1 mb-7 bg-body rounded">
-      <div
-        class="card-header bg-primary text-light"
-        [ngStyle]="{ borderRadius: '5px' }"
-      >
-        ALMACÉN
-      </div>
+    <div class="card">
+      <div class="card-header bg-secondary text-light">ALMACÉN</div>
       <div class="card-body">
         <form [formGroup]="storeProductForm" (submit)="onSave()">
           <!-- name field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="name"
               formControlName="name"
@@ -46,19 +40,12 @@
           <div class="row mt-1">
             <div class="col-md-6">
               <div class="d-grid gap-2 mt-2">
-                <a
-                  (click)="onNewDoc()"
-                  [ngStyle]="{ borderRadius: '5px' }"
-                  class="btn btn-info"
-                >
-                  N u e v o
-              </a>
+                <a (click)="onNewDoc()" class="btn btn-secondary"> N u e v o </a>
               </div>
             </div>
             <div class="col-md-6">
               <div class="d-grid gap-2 mt-2">
                 <button
-                  [ngStyle]="{ borderRadius: '5px' }"
                   type="submit"
                   class="btn btn-primary"
                   [disabled]="storeProductForm.invalid"
@@ -73,15 +60,13 @@
     </div>
   </div>
 
-  <div [ngStyle]="{ borderRadius: '5px' }" class="col-md-8">
-    <table
-       class="table table-bordered border-primary table-sm table-hover mt-1"
-    >
-      <thead class="bg-primary text-light">
+  <div class="col-md-8">
+    <table class="zui-table zui-table-rounded mt-1">
+      <thead class="bg-info text-light">
         <tr>
           <th class="col-sm-6">Almacén</th>
           <th>Actualizado</th>
-          <th class="col-sm-3 text-end">Acciones</th>
+          <th class="col-sm-2 text-end">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -89,15 +74,10 @@
           <td>{{ store.name | uppercase }}</td>
           <td>{{ store.updatedAt | date | uppercase }}</td>
           <td class="text-end">
-            <a
-              [ngStyle]="{ borderRadius: '5px' }"
-              (click)="onEdit(store)"
-              class="btn btn-primary btn-sm"
-            >
+            <a (click)="onEdit(store)" class="btn btn-primary btn-sm">
               Editar
             </a>
             <a
-              [ngStyle]="{ borderRadius: '5px' }"
               (click)="onUdateStatus(store)"
               class="btn btn-danger btn-sm mx-1"
             >

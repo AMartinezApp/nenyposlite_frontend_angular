@@ -1,0 +1,146 @@
+<div class="row">
+  <div class="col-4 mt-1">
+    <input
+      #txtSearch
+      class="form-control"
+      type="text"
+      autofocus
+      placeholder="Buscar productos"
+      (keyup)="onSearch(txtSearch.value)"
+      (keyup.enter)="getByBarCode(txtSearch.value)"
+    />
+    <ul class="pagination pagination-sm mt-1">
+      <button type="button" class="btn btn-secondary btn-sm" (click)="prevPage()">
+        Atrás
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-secondary btn-sm mx-1"
+        (click)="nextPage()"
+        [disabled]="
+          (products | productFilterInvoice : page : search : docByPage)
+            .length === 0
+        "
+      >
+        Ver más
+      </button>
+    </ul>
+  </div>
+
+  <div class="col-8">
+    <table class="table-borderless">
+      <tbody>
+        <tr
+          *ngFor="
+            let product of products
+              | productFilterInvoice : page : search : docByPage
+          "
+        >
+          <td>
+            <div class="card" style="width: 100%">
+              <div class="card-body">
+                <p class="card-text">
+                  <a (click)="onSelectProduct(product)" class="btn btn-sm">
+                    <img src="/assets/img/add.svg" />
+                  </a>
+
+                  <label class="title-label">{{ product.name }}</label>
+
+                  {{ product.price | currency }} |
+
+                  <img src="/assets/img/barcode.png" alt="Bar code" />
+                  {{ product.barcode }}
+                  |
+                  <img src="/assets/img/category.png" alt="Categoría" />
+                  {{ product.products_category.name }}
+                  |
+                  <img src="/assets/img/store.png" alt="Almacén" />
+                  {{ product.products_store.name }}
+                  |
+                </p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<form [formGroup]="shopingCartForm">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-floating mt-2">
+        <input
+          required
+          name="productdetail"
+          readonly="true"
+          formControlName="productdetail"
+          type="text"
+          class="form-control"
+          id="productdetail"
+          placeholder="Descuento"
+        />
+        <label for="floatingInput">Producto</label>
+        <!-- validation-error -->
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-floating mt-2">
+        <input
+          required
+          name="price"
+          readonly="true"
+          formControlName="price"
+          type="number"
+          class="form-control"
+          id="price"
+          placeholder="Precio"
+        />
+        <label for="floatingInput">Precio</label>
+        <!-- validation-error -->
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-floating mt-2">
+        <input
+          required
+          #quantity
+          name="quantity"
+          formControlName="quantity"
+          type="number"
+          class="form-control"
+          id="quantity"
+          placeholder="Cantidad"
+          (keyup.enter)="onDiscountSetFocused()"
+        />
+        <label for="floatingInput">Cantidad</label>
+        <!-- validation-error -->
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-floating mt-2">
+        <input
+          #discount
+          required
+          name="discount"
+          formControlName="discount"
+          type="number"
+          class="form-control"
+          id="discount"
+          placeholder="Descuento"
+          (keyup.enter)="addToCart()"
+        />
+        <label for="floatingInput">Descuento</label>
+        <!-- validation-error -->
+      </div>
+    </div>
+  </div>
+
+  <input type="hidden" name="id" formControlName="id" />
+  <input type="hidden" name="idinvoice" formControlName="idinvoice" />
+  <input type="hidden" name="cost" formControlName="cost" />
+  <input type="hidden" name="price" formControlName="price" />
+  <input type="hidden" name="tax" formControlName="tax" />
+</form>

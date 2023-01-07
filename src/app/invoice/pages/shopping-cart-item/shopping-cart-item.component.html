@@ -1,0 +1,28 @@
+<table class="table table-sm">
+  <thead >
+    <tr>
+      <th scope="col"></th>
+      <th class="col-sm-5">PRODUCTO</th>
+      <th>CANT.</th>
+      <th class="text-end">SUBTOTAL</th>
+      <th class="text-end">DESCUENTO</th>
+      <th class="text-end">ITBIS</th>
+      <th class="text-end">TOTAL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of cartItems$ | async">
+      <td>
+        <button (click)="onDeleteClicked(item)">
+          <img src="/assets/img/close.svg" alt="Eliminar articulo" />
+        </button>
+      </td>
+      <td>{{ item.productdetail }}</td>
+      <td>{{ item.quantity | number : "1.2-2" }}</td>
+      <td class="text-end">{{ item.price | number : "1.2-2" }}</td>
+      <td class="text-end">{{ item.discount | number : "1.2-2" }}</td>
+      <td class="text-end">{{ item.tax | number : "1.2-2" }}</td>
+      <td class="text-end">{{ item.total | number : "1.2-2" }}</td>
+    </tr>
+  </tbody>
+</table>

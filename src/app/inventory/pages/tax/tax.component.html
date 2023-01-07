@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-4">
-      <div [ngStyle]="{ borderRadius: '5px' }" class="card shadow p-1 mb-7 bg-body rounded">
-        <div class="card-header bg-primary text-light"
-        [ngStyle]="{ borderRadius: '5px' }"
+      <div  class="card">
+        <div class="card-header bg-secondary text-light"
+        
         >
         IMPUESTOS
       </div>
@@ -11,7 +11,7 @@
             <!-- name field  -->
             <div class="form-floating mt-2">
               <input
-              [ngStyle]="{ borderRadius: '5px' }"
+              
                 required
                 name="name"
                 formControlName="name"
@@ -46,7 +46,7 @@
 
             <div class="form-floating mt-2">
                 <input
-                [ngStyle]="{ borderRadius: '5px' }"
+                
                   required
                   name="value"
                   formControlName="value"
@@ -79,8 +79,8 @@
                 <div class="d-grid gap-2 mt-2">
                   <a
                     (click)="onNewDoc()"
-                    [ngStyle]="{ borderRadius: '5px' }"
-                    class="btn btn-info"
+                    
+                    class="btn btn-secondary"
                   >
                     N u e v o
                 </a>
@@ -89,7 +89,7 @@
               <div class="col-md-6">
                 <div class="d-grid gap-2 mt-2">
                   <button
-                    [ngStyle]="{ borderRadius: '5px' }"
+                    
                     type="submit"
                     class="btn btn-primary"
                     [disabled]="taxProductForm.invalid"
@@ -104,13 +104,14 @@
       </div>
     </div>
   
-    <div [ngStyle]="{ borderRadius: '5px' }"  class="col-md-8">
-      <table class="table table-bordered border-primary border-radius-5 table-sm table-hover mt-1">
-        <thead class="bg-primary text-light">
+    <div   class="col-md-8">
+      <!-- <table class="table table-bordered border-primary table-sm table-hover mt-1"> -->
+        <table class="zui-table zui-table-rounded mt-1">
+        <thead class="bg-info text-light">
           <tr>
-            <th class="col-sm-6">Nombre</th>
-            <th class="text-end" >Valor</th>
-            <th class="col-sm-3 text-end">Acciones</th>
+            <th class="col-sm-6">NOMBRE</th>
+            <th class="text-end" >VALOR</th>
+            <th class="col-sm-3 text-end">ACCIONES</th>
           </tr>
         </thead>
         <tbody>
@@ -119,13 +120,13 @@
             <td class="text-end">{{ tax.value | number  }}</td>
             <td class="text-end">
               <a 
-              [ngStyle]="{ borderRadius: '5px' }"
+              
               (click)="onEdit(tax)" 
               class="btn btn-primary btn-sm">
                Editar
               </a>
               <a 
-              [ngStyle]="{ borderRadius: '5px' }"
+              
               (click)="onUdateStatus(tax)"
               class="btn btn-danger btn-sm mx-1">
                Borrar

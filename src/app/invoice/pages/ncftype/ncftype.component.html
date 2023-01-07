@@ -1,21 +1,12 @@
 <div class="row">
   <div class="col-md-4">
-    <div
-      [ngStyle]="{ borderRadius: '5px' }"
-      class="card shadow p-1 mb-7 bg-body rounded"
-    >
-      <div
-        class="card-header bg-primary text-light"
-        [ngStyle]="{ borderRadius: '5px' }"
-      >
-        NCFs
-      </div>
+    <div class="card">
+      <div class="card-header bg-secondary text-light">NCFs</div>
       <div class="card-body">
         <form [formGroup]="ncftypeForm">
           <!-- name field  -->
           <div class="form-floating mt-2">
             <select
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               class="form-select"
               id="name"
@@ -46,7 +37,6 @@
             <div class="col-md-6">
               <div class="form-floating mt-2">
                 <input
-                  [ngStyle]="{ borderRadius: '5px' }"
                   required
                   readonly="true"
                   maxlength="2"
@@ -71,7 +61,6 @@
             <div class="col-md-6">
               <div class="form-floating mt-2">
                 <input
-                  [ngStyle]="{ borderRadius: '5px' }"
                   required
                   readonly="true"
                   maxlength="2"
@@ -98,7 +87,6 @@
           <!-- inicial_num field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               readonly="true"
               maxlength="9"
@@ -124,7 +112,6 @@
           <!-- final_num field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               maxlength="9"
               name="final_num"
@@ -164,7 +151,6 @@
           <!-- current_num field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               readonly="true"
               name="current_num"
@@ -189,7 +175,6 @@
           <!-- expiration field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="expiration"
               formControlName="expiration"
@@ -248,19 +233,12 @@
           <div class="row mt-1">
             <div class="col-md-6">
               <div class="d-grid gap-2 mt-2">
-                <a
-                  (click)="onNewDoc()"
-                  [ngStyle]="{ borderRadius: '5px' }"
-                  class="btn btn-info"
-                >
-                  N u e v o
-                </a>
+                <a (click)="onNewDoc()" class="btn btn-secondary"> N u e v o </a>
               </div>
             </div>
             <div class="col-md-6">
               <div class="d-grid gap-2 mt-2">
                 <button
-                  [ngStyle]="{ borderRadius: '5px' }"
                   (click)="onSave()"
                   class="btn btn-primary"
                   [disabled]="ncftypeForm.invalid"
@@ -276,10 +254,8 @@
   </div>
 
   <div class="col-md-8">
-    <table
-      class="table table-bordered border-primary table-sm table-hover mt-1"
-    >
-      <thead class="bg-primary text-light">
+    <table class="zui-table zui-table-rounded mt-1">
+      <thead class="bg-info text-light">
         <tr>
           <th>Nombre</th>
           <th>Tipo</th>
@@ -288,6 +264,7 @@
           <th class="text-end">Acciones</th>
         </tr>
       </thead>
+
       <tbody>
         <tr *ngFor="let ncftype of ncftypes">
           <td>{{ ncftype.name }}</td>
@@ -295,15 +272,10 @@
           <td>{{ ncftype.prefix + ncftype.current_num }}</td>
           <td>{{ ncftype.expiration | date }}</td>
           <td class="text-end">
-            <a
-              [ngStyle]="{ borderRadius: '5px' }"
-              (click)="onEdit(ncftype)"
-              class="btn btn-primary btn-sm"
-            >
+            <a (click)="onEdit(ncftype)" class="btn btn-primary btn-sm">
               Editar
             </a>
             <a
-              [ngStyle]="{ borderRadius: '5px' }"
               (click)="onUpdateStatus(ncftype)"
               class="btn btn-danger btn-sm mx-1"
             >
@@ -313,10 +285,7 @@
         </tr>
       </tbody>
     </table>
-    <div
-      [ngStyle]="{ borderRadius: '5px' }"
-      class="alert alert-info shadow p-1 mb-7"
-    >
+    <div class="alert alert-info mt-1">
       <p class="mb-0">{{ help }}</p>
     </div>
   </div>

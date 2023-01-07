@@ -1,18 +1,12 @@
 <div class="row">
   <div class="col-md-4">
-    <div [ngStyle]="{ borderRadius: '5px' }" class="card shadow p-1 mb-7 bg-body rounded">
-      <div
-        class="card-header bg-primary text-light"
-        [ngStyle]="{ borderRadius: '5px' }"
-      >
-        USUARIO
-      </div>
+    <div class="card">
+      <div class="card-header bg-secondary text-light">USUARIO</div>
       <div class="card-body">
         <form [formGroup]="userRegisterForm" (submit)="onSave()">
           <!-- email field  -->
-          <div class="form-floating mt-2">
+          <div class="form-floating">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="email"
               formControlName="email"
@@ -47,7 +41,6 @@
           <!-- password field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="password"
               formControlName="password"
@@ -79,10 +72,9 @@
             <!-- validation-error -->
           </div>
 
-           <!-- confirm field  -->
-           <div class="form-floating mt-2">
+          <!-- confirm field  -->
+          <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="confirm"
               formControlName="confirm"
@@ -112,13 +104,12 @@
               Se ha excedido el límite de carácteres
             </div>
             <div>
-                <div
-              *ngIf="userRegisterForm.get('confirm')?.errors?.['noMatch']"
-              class="alert alert-danger"
-            >
-              Las claves digitadas no coinciden
-            </div>
-                
+              <div
+                *ngIf="userRegisterForm.get('confirm')?.errors?.['noMatch']"
+                class="alert alert-danger"
+              >
+                Las claves digitadas no coinciden
+              </div>
             </div>
             <!-- validation-error -->
           </div>
@@ -126,7 +117,6 @@
           <!-- idrole field  -->
           <div class="form-floating mt-2">
             <select
-              [ngStyle]="{ borderRadius: '5px' }"
               class="form-select"
               name="idrole"
               formControlName="idrole"
@@ -164,7 +154,6 @@
           <!-- name field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="name"
               formControlName="name"
@@ -199,7 +188,6 @@
           <!-- phone field  -->
           <div class="form-floating mt-2">
             <input
-              [ngStyle]="{ borderRadius: '5px' }"
               required
               name="phone"
               formControlName="phone"
@@ -235,20 +223,16 @@
 
           <div class="row mt-1">
             <div class="col-md-6">
-              <div class="d-grid gap-2 mt-2">
-                <a
-                  (click)="onNewDoc()"
-                  [ngStyle]="{ borderRadius: '5px' }"
-                  class="btn btn-info"
-                >
+              <div class="d-grid gap-2">
+                <a (click)="onNewDoc()" class="btn btn-secondary">
                   N u e v o
                 </a>
               </div>
             </div>
+
             <div class="col-md-6">
-              <div class="d-grid gap-2 mt-2">
+              <div class="d-grid gap-2">
                 <button
-                  [ngStyle]="{ borderRadius: '5px' }"
                   (click)="onSave()"
                   class="btn btn-primary"
                   [disabled]="userRegisterForm.invalid"
@@ -264,42 +248,37 @@
   </div>
 
   <div class="col-md-8">
-    <table
-      class="table table-bordered border-primary table-sm table-hover mt-1"
-    >
-      <thead class="bg-primary text-light">
-        <tr>
-          <th>Correo / Usuario</th>
-          <th>Rol</th>
-          <th>Nombre</th>
-          <th>Teléfono</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{ user.email }}</td>
-          <td>{{ user.users_role.name }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.phone }}</td>
-          <td class="text-end">
-            <a
-              [ngStyle]="{ borderRadius: '5px' }"
-              (click)="onEdit(user)"
-              class="btn btn-primary btn-sm"
-            >
-              Editar
-            </a>
-            <a
-              [ngStyle]="{ borderRadius: '5px' }"
-              (click)="onUdateStatus(user)"
-              class="btn btn-danger btn-sm mx-1"
-            >
-              Borrar
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="zui-table zui-table-rounded mt-1">
+        <thead class="bg-info text-light">
+          <tr>
+            <th class="col-sm-3">Correo / Usuario</th>
+            <th class="col-sm-2">Rol</th>
+            <th class="col-sm-3">Nombre</th>
+            <th class="col-sm-2">Teléfono</th>
+            <th class="text-end">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.email }}</td>
+            <td>{{ user.users_role.name }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.phone }}</td>
+            <td class="text-end">
+              <a (click)="onEdit(user)" class="btn btn-primary btn-sm">
+                Editar
+              </a>
+              <a
+                (click)="onUdateStatus(user)"
+                class="btn btn-danger btn-sm mx-1"
+              >
+                Borrar
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

@@ -87,6 +87,7 @@ export class CategoryComponent implements OnInit {
     // capture data for later editing
     this.categoryProductForm.patchValue({ name: category.name });
     this.categoryProductForm.patchValue({ id: category.id });
+    this.categoryProductForm.patchValue({ status: category.status });
   }
   
   onUdateStatus(category: CategoryI): void {

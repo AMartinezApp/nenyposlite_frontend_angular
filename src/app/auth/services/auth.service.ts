@@ -1,60 +1,56 @@
- 
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
- 
+
 import { Observable, BehaviorSubject, tap, throwError } from 'rxjs';
-import { LoginI, RoleI, UserI, UserResponseI } from '../models/auth.models'; 
-import { PathRest } from '../../commons/static/path-api'; 
+import { LoginI, RoleI, UserI, UserResponseI } from '../models/auth.models';
+import { PathRest } from '../../commons/static/path-api';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
- 
-  authSubject = new BehaviorSubject(false);
+export class AuthService  {
+  private loggedIn = new BehaviorSubject<boolean>(false);
+  loggedIn$ = this.loggedIn.asObservable();
 
-  private token!: string;
-
-  constructor(private httpClient: HttpClient) {} 
+  constructor(private httpClient: HttpClient) {
+    this.loggedIn.next(this.isLoggedIn());
+  }
+   
 
   login(user: LoginI): Observable<UserResponseI> {
-    return this.httpClient
-      .post<UserResponseI>(PathRest.POST_LOGIN, user)
-      .pipe(
-        tap((res: UserResponseI) => {
-          if (res) {
-             
-            this.saveToken(res.token);
-            
-          }
-        }) 
-      );
+    return this.httpClient.post<UserResponseI>(PathRest.POST_LOGIN, user).pipe(
+      tap((res: UserResponseI) => {
+        if (res) {
+          this.loggedIn.next(true);
+          this.saveToken(res.token);
+        }
+      })
+    );
   }
   getAll(): Observable<UserI[]> {
-    return this.httpClient.get<UserI[]>(PathRest.GET_LOGIN)
+    return this.httpClient.get<UserI[]>(PathRest.GET_LOGIN);
   }
 
   getAllRole(): Observable<RoleI[]> {
-    return this.httpClient.get<RoleI[]>(PathRest.USER_ROL)
+    return this.httpClient.get<RoleI[]>(PathRest.USER_ROL);
   }
 
-  onSave(user: UserI){
-    return this.httpClient.post<UserI>(PathRest.REGISTER_USER,user);
+  onSave(user: UserI) {
+    return this.httpClient.post<UserI>(PathRest.REGISTER_USER, user);
   }
 
-  onUpdate(user: UserI){
-    return this.httpClient.put<UserI>(`${PathRest.GET_LOGIN}/${user.id}`,user);
+  onUpdate(user: UserI) {
+    return this.httpClient.put<UserI>(`${PathRest.GET_LOGIN}/${user.id}`, user);
   }
- 
+
   logout() {
-    this.token = '';
     localStorage.removeItem('ACCESS_TOKEN');
     localStorage.removeItem('USER_ID');
+    this.loggedIn.next(false);
   }
 
   private saveToken(token: string): void {
     localStorage.setItem('ACCESS_TOKEN', token);
-    this.token = token;
   }
 
   isLoggedIn(): boolean {
@@ -64,6 +60,4 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('ACCESS_TOKEN');
   }
-
-   
 }

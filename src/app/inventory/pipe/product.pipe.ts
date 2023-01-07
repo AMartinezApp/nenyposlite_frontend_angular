@@ -8,9 +8,10 @@ export class ProductPipe implements PipeTransform {
   transform(
     products: ProductI[],
     page: number = 0,
-    search: string = ''
+    search: string = '',
+    docByPage: number = 0
   ): ProductI[] {
-    if (search.length === 0) return products.slice(page, page + 10);
+    if (search.length === 0) return products.slice(page, page + docByPage);
 
     const resultFiltered = products.filter(
       (product) =>
@@ -21,6 +22,6 @@ export class ProductPipe implements PipeTransform {
           .includes(search.toLowerCase()) ||
         product.products_store.name.toLowerCase().includes(search.toLowerCase())
     );
-    return resultFiltered.slice(page, page + 10);
+    return resultFiltered.slice(page, page + docByPage);
   }
 }

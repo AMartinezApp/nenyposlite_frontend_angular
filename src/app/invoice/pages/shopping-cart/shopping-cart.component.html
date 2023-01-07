@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-md-9">
+    <app-shopping-cart-catalog></app-shopping-cart-catalog>
+    <div class="card" style="height: 369px">
+      <div class="card-body">
+        <p class="card-text">
+          <app-shopping-cart-item></app-shopping-cart-item>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <!-- invoice buttom -->
+
+    <div class="card bg-secondary">
+      <div class="card-body">
+        <div class="row text-end">
+          <p class="sub-total">
+            <span class="sub-total-label">SUB-TOTAL:</span>
+            {{ price$ | async | currency }}
+          </p>
+          <p class="sub-total">
+            <span class="sub-total-label">DESCUENTO:</span>
+            {{ discount$ | async | currency }}
+          </p>
+          <p>
+            <span class="sub-total-label">ITBIS:</span>
+            {{ tax$ | async | currency }}
+          </p>
+          <hr />
+          <p class="total">
+            <span class="total-label">TOTAL:</span>
+            {{ total$ | async | currency }}
+          </p>
+        </div>
+        <button
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#producDetails"
+          class="btn btn-primary"
+        >
+          Cobrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="producDetails"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="border-radius: 5px">
+      <div class="modal-body">
+        <app-shopping-cart-payment></app-shopping-cart-payment>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          id="cancel"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Salir
+        </button>
+
+        <ng-template #save>
+          <button type="button" class="btn btn-primary">Guardar</button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

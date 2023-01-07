@@ -10,7 +10,7 @@ import { CategoryComponent } from './pages/category/category.component';
 import { ProductComponent } from './pages/product/product.component';
 import { SupplierComponent } from './pages/supplier/supplier.component';
 
-import { SupplierPipe } from './pipe/supplier.pipe';
+import { SupplierPipe } from './pipe/supplier.pipe'; 
 import { ProductPipe } from './pipe/product.pipe';
 
 
@@ -23,8 +23,8 @@ import { ProductPipe } from './pipe/product.pipe';
     StoreComponent,
     CategoryComponent,
     ProductComponent,
-    ProductPipe,
     SupplierPipe,
+    ProductPipe,
    
 
     SupplierComponent

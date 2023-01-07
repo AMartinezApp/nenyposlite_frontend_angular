@@ -1,0 +1,202 @@
+<div class="row">
+  <div class="col-md-4">
+    <input
+      #txtSearch
+      class="form-control"
+      type="text"
+      autofocus
+      placeholder="Buscar cliente"
+      (keyup)="onSearch(txtSearch.value)"
+    />
+    <ul class="pagination pagination-sm mt-1">
+      <button type="button" class="btn btn-secondary btn-sm" (click)="prevPage()">
+        Atrás
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-secondary btn-sm mx-1"
+        (click)="nextPage()"
+      >
+        Ver más
+      </button>
+    </ul>
+  </div>
+
+  <div class="col-md-8">
+    <table class="table-borderless">
+      <tbody>
+        <tr
+          *ngFor="
+            let customer of customers
+              | customerFilter : page : search : docByPage
+          "
+        >
+          <td>
+            <a (click)="onSelectProduct(customer)" class="btn btn-sm">
+              <img src="/assets/img/add.svg" />
+            </a>
+            <label class="title-label">{{ customer.name }}</label>
+            {{ customer.email }} | {{ customer.phone }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<form [formGroup]="paymentForm">
+  <div class="row">
+    <div class="col-md-6">
+      <input
+        class="form-control form-control-sm"
+        type="text"
+        placeholder="Cliente"
+        aria-label="Cliente"
+      />
+      <input
+        class="form-control form-control-sm mt-1"
+        type="text"
+        placeholder="Dirección"
+        aria-label="Dirección"
+      />
+      <div class="row mt-1">
+        <div class="col-md-6">
+          <div class="card">
+            <h6 class="card-header bg-secondary">Condición</h6>
+            <div class="card-body">
+              <select
+                class="form-select form-select-sm"
+                aria-label=".form-select-sm example"
+              >
+                <option selected>Contado</option>
+                <option value="credit">Crédito</option>
+                <option value="cash">Contado</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <h6 class="card-header bg-secondary">NCF</h6>
+            <div class="card-body">
+              <select
+                class="form-select form-select-sm"
+                aria-label=".form-select-sm example"
+              >
+                <option selected>Consumo</option>
+                <option value="1">Consumo</option>
+                <option value="2">Valor fiscal</option>
+                <option value="3">Regimen especial</option>
+                <option value="4">Gubernamental</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-mt-1">
+        <p class="total">
+          <span class="total-label">TOTAL:</span>
+          {{ total$ | async | currency }}
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <h6 class="card-header bg-secondary">Forma de pago</h6>
+        <div class="card-body">
+          <div class="row">
+            <!-- column one type payment -->
+            <div class="col-md-6">
+              <input
+                #txtCash
+                formControlName="cash"
+                class="form-control form-control-sm"
+                type="text"
+                placeholder="Efectivo"
+                (keyup)="sumRecibe(txtCash.value)"
+              />
+              <input
+                #txtTransfer
+                formControlName="transfer"
+                class="form-control form-control-sm mt-1"
+                type="text"
+                placeholder="Transferencia"
+                (keyup)="sumRecibe(txtTransfer.value)"
+              />
+              <input
+                #txtDebitCard
+                formControlName="debitcard"
+                class="form-control form-control-sm mt-1"
+                type="text"
+                placeholder="Tarjeta Débito"
+                (keyup)="sumRecibe(txtDebitCard.value)"
+              />
+            </div>
+            <!-- column two type payment  -->
+            <div class="col-md-6">
+              <input
+                #txtDeposit
+                formControlName="deposit"
+                class="form-control form-control-sm"
+                type="text"
+                placeholder="Depósito"
+                (keyup)="sumRecibe(txtDeposit.value)"
+              />
+              <input
+                #txtCheck
+                formControlName="check"
+                class="form-control form-control-sm mt-1"
+                type="text"
+                placeholder="Cheque"
+                (keyup)="sumRecibe(txtCheck.value)"
+              />
+              <input
+                #txtCreditCard
+                formControlName="creditcard"
+                class="form-control form-control-sm mt-1"
+                type="text"
+                placeholder="Tarjeta Crédito"
+                (keyup)="sumRecibe(txtCreditCard.value)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-mt-1">
+        <p class="total">
+          <span class="total-label">RECIBIDO:</span>
+          {{ received | currency }}
+        </p>
+      </div>
+      <div class="row-mt-1">
+        <p class="total">
+          <!-- <span class="total-label">RECIBIDO:</span> -->
+          <span class="total-label">CAMBIO..:</span>
+          {{ total$ | async | currency }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-floating mt-1">
+        <textarea
+          required
+          rows="10"
+          name="nota"
+          formControlName="nota"
+          type="text"
+          class="form-control"
+          id="nota"
+          placeholder="Nota"
+        ></textarea>
+        <label for="floatingInput">NOTA</label>
+      </div>
+      <!-- <pre>
+        {{ paymentForm.value | json }}
+      </pre> -->
+    </div>
+  </div>
+</form>

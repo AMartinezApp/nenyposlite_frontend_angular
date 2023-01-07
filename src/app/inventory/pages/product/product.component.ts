@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
+  FormBuilder, 
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -30,6 +29,7 @@ export class ProductComponent implements OnInit {
 
   page: number = 0;
   totalDoc: number = 0;
+  docByPage: number = 10;
   search: string = '';
 
   constructor(
@@ -194,11 +194,11 @@ export class ProductComponent implements OnInit {
   }
 
   nextPage() {
-    this.page += 10;
+    this.page += this.docByPage;
   }
 
   prevPage() {
-    if (this.page > 0) this.page -= 10;
+    if (this.page > 0) this.page -= this.docByPage;
   }
 
   onSearch(search: string) {

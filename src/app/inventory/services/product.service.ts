@@ -15,7 +15,9 @@ export class ProductService {
   getAll(): Observable<ProductI[]> { 
     return this.httpClient.get<ProductI[]>(PathRest.PRODUCTS);
  }
-
+ getByBarCode(barcode: string): Observable<ProductI[]>{
+  return this.httpClient.get<ProductI[]>(`${PathRest.PRODUCTS}/barcode/${barcode}`);
+}
   onSave(product: ProductI): Observable<ProductI[]>{
     return this.httpClient.post<ProductI[]>(PathRest.PRODUCTS,product);
   }

@@ -20,7 +20,9 @@ export class SupplierComponent implements OnInit {
 
   page: number = 0;
   totalDoc: number = 0;
+  docByPage: number = 5;
   search: string = '';
+  status: string='Activo';
 
   constructor(
     private supplierService: SupplierService,
@@ -65,15 +67,15 @@ export class SupplierComponent implements OnInit {
     }));
   }
 
-  onNewDoc() {
-    this.supplierForm.reset();
-  }
-
   getAll() {
     this.supplierService.getAll().subscribe((res) => {
       this.suppliers = res;
       this.totalDoc = this.suppliers.length;
     });
+  }
+
+  onNewDoc() {
+    this.supplierForm.reset();
   }
 
   onSave() {

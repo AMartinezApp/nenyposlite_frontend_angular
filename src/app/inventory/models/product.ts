@@ -1,4 +1,5 @@
 export interface ProductI {
+   
   id: number;
   barcode: string;
   name: string;
@@ -21,6 +22,14 @@ export interface ProductI {
   products_tax: {
     id: number;
     name: string;
+    value: number;
   };
   iduser: number;
 }
+
+export interface ProductState {
+  loading:boolean;
+  products: ReadonlyArray<ProductI>;
+}
+
+  

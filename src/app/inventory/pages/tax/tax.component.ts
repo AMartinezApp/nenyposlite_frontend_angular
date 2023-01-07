@@ -50,6 +50,7 @@ export class TaxComponent implements OnInit {
 
   onSave(): void {
     if (this.taxProductForm.value.id > 0) {
+      this.taxProductForm.patchValue({ status: 'A' });
       Swal.fire({
         title: 'Modificar?',
         text: 'Está modificando el documento!',

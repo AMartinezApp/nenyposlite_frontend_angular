@@ -14,10 +14,13 @@ export class CustomerService {
   getAll(): Observable<CustomerI[]>{
     return this.httpClient.get<CustomerI[]>(PathRest.CUSTOMERS);
   }
+
   onSave(customer: CustomerI): Observable<CustomerI[]>{
     return this.httpClient.post<CustomerI[]>(PathRest.CUSTOMERS, customer);
   }
+  
   onUpdate(customer: CustomerI): Observable<CustomerI[]>{
     return this.httpClient.put<CustomerI[]>(`${PathRest.CUSTOMERS}/${customer.id}`, customer);
   }
+
 }

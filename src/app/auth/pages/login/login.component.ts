@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserI } from '../../models/auth.models';
@@ -8,12 +13,11 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   loginForm!: FormGroup;
-  
+
   constructor(
     private readonly fb: FormBuilder,
     private authService: AuthService,
@@ -21,34 +25,38 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-   this.loginForm= this.iniForm()
+    this.loginForm = this.iniForm();
   }
 
   iniForm(): FormGroup {
     return this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required,  Validators.minLength(4)]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
     });
   }
 
   onLogin(): void {
-    this.authService.login(this.loginForm.value).subscribe((res) => {
-      let dataResponse: UserI = res.user;
-       
-       localStorage.setItem('USER_ID',  `${dataResponse.id}` );
-      this.router.navigateByUrl('/home');
-    },error=>{
-     if (error.error.result="INVALID_CREDENCIAL"){
-      Swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title:'Algo salió mal, inténtelo de nuevo',
-        showConfirmButton: false,
-        timer: 2000,
-      });
-     }
-    })
+    this.authService.login(this.loginForm.value).subscribe(
+      (res) => {
+        let dataResponse: UserI = res.user;
+
+        localStorage.setItem('USER_ID', `${dataResponse.id}`);
+        this.router.navigateByUrl('/home');
+      },
+      (error) => {
+        if ((error.error.result = 'INVALID_CREDENCIAL')) {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Algo salió mal, inténtelo de nuevo',
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      }
+    );
   }
-
-
 }

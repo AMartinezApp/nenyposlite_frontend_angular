@@ -20,6 +20,7 @@ export class CustomerComponent implements OnInit {
 
   page: number = 0;
   totalDoc: number = 0;
+  docByPage: number = 5;
   search: string = '';
   status: string='Activo';
 
@@ -62,6 +63,7 @@ export class CustomerComponent implements OnInit {
       this.totalDoc = this.customers.length;
     });
   }
+
   onNewDoc() {
     this.customerForm.reset();
   }
@@ -105,6 +107,36 @@ export class CustomerComponent implements OnInit {
     this.customerForm.patchValue({ name: customer.name });
     this.customerForm.patchValue({ phone: customer.phone });
     this.customerForm.patchValue({ email: customer.email });
+    this.customerForm.patchValue({ iduser: localStorage.getItem('USER_ID') });
+  }
+
+  onUpdateStatus(customer: CustomerI){
+    Swal.fire({
+      title: 'Borrando el documento',
+      text: 'No podrá recuperarlo si lo hace!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, borralo!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        this.onEdit(customer);
+        this.customerForm.patchValue({ status: 'D' });
+         console.log(customer);
+
+        this.customerService
+          .onUpdate(this.customerForm.value)
+          .subscribe((res) => {
+            this.getAll();
+            this.customerForm.reset();
+            this.alertDone();
+            console.log(res);
+          });
+      }
+    });
   }
 
   alertDone() {
@@ -118,12 +150,11 @@ export class CustomerComponent implements OnInit {
   }
 
   nextPage() {
-    this.page +=5;
+    this.page += this.docByPage;
   }
 
   prevPage() {
-    if (this.page > 0)
-        this.page -=5;
+    if (this.page > 0) this.page -= this.docByPage;
   }
 
   onSearch(search: string){
@@ -131,9 +162,7 @@ export class CustomerComponent implements OnInit {
     this.search = search;
   }
 
-  onUpdateStatus(customer: CustomerI){
-    this.customerForm.patchValue({ status: customer.status });
-  }
+  
 
 
 }

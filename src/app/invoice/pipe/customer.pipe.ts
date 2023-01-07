@@ -8,9 +8,10 @@ export class CustomerPipe implements PipeTransform {
   transform(
     customers: CustomerI[],
     page: number = 0,
-    search: string = ''
+    search: string = '',
+    pageNumber: number = 0
   ): CustomerI[] {
-    if (search.length === 0) return customers.slice(page, page + 5);
+    if (search.length === 0) return customers.slice(page, page + pageNumber);
 
     const resultFiltered = customers.filter(
       (customers) =>
@@ -18,6 +19,6 @@ export class CustomerPipe implements PipeTransform {
         customers.phone.toLowerCase().includes(search.toLowerCase()) ||
         customers.email.toLowerCase().includes(search.toLowerCase())
     );
-    return resultFiltered.slice(page, page + 5);
+    return resultFiltered.slice(page, page + pageNumber);
   }
 }

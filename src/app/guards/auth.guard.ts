@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     // return true if the user loggedIn and pass 
-    if (this.authService.isLoggedIn()) {
+    if (this.authService.loggedIn$) {
       return true;
     }
     // return false and redirect to login page
